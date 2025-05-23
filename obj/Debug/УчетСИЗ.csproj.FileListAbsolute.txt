@@ -27,3 +27,15 @@ C:\$Производственная ПМ11\В разработке\УчетСИ
 C:\$Производственная ПМ11\В разработке\УчетСИЗ\obj\Debug\УчетСИЗ.csproj.Up2Date
 C:\$Производственная ПМ11\В разработке\УчетСИЗ\obj\Debug\ViewModels\EditUserWindow.g.cs
 C:\$Производственная ПМ11\В разработке\УчетСИЗ\obj\Debug\ViewModels\EditUserWindow.baml
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\УчетСИЗ.csproj.AssemblyReference.cache
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\MainWindow.g.cs
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\ViewModels\AccountantWindow.g.cs
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\ViewModels\AddUserWindow.g.cs
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\ViewModels\EditUserWindow.g.cs
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\ViewModels\LoginWindow.g.cs
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\App.g.cs
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\УчетСИЗ_Content.g.cs
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\УчетСИЗ_MarkupCompile.cache
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\УчетСИЗ_MarkupCompile.lref
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\УчетСИЗ.exe
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\УчетСИЗ.pdb

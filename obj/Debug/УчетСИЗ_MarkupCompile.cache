@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\$Производственная ПМ11\В разработке\УчетСИЗ\obj\Debug\
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\
 УчетСИЗ
 none
 false
 DEBUG;TRACE
-C:\$Производственная ПМ11\В разработке\УчетСИЗ\App.xaml
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\App.xaml
 51614353709
 21864639295
-27191794313
-18-1949312249
+26-1729983808
+18582650089
 MainWindow.xaml;ViewModels\AccountantWindow.xaml;ViewModels\AddUserWindow.xaml;ViewModels\EditUserWindow.xaml;ViewModels\LoginWindow.xaml;
 
 True
