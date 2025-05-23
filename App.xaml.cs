@@ -13,5 +13,6 @@ namespace УчетСИЗ
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

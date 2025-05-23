@@ -1,0 +1,34 @@
+﻿<Window x:Class="УчетСИЗ.ViewModels.AddEditVydachaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:УчетСИЗ.ViewModels"
+        mc:Ignorable="d"
+        Title="Выдача" Height="320" Width="400" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Сотрудник:"/>
+        <ComboBox x:Name="EmployeeComboBox" Grid.Row="1" Margin="0,0,0,10"/>
+        <Label Content="СИЗ:" Grid.Row="2"/>
+        <ComboBox x:Name="SIZComboBox" Grid.Row="3" Margin="0,0,0,10"/>
+        <Label Content="Количество:" Grid.Row="4"/>
+        <TextBox x:Name="QuantityTextBox" Grid.Row="5" Margin="0,0,0,10"/>
+        <Label Content="Срок износа:" Grid.Row="6"/>
+        <DatePicker x:Name="WearPeriodPicker" Grid.Row="7" Margin="0,0,0,10"/>
+        <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Content="Сохранить" Width="100" Margin="0,0,10,0" Click="Save_Click"/>
+            <Button Content="Отмена" Width="100" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

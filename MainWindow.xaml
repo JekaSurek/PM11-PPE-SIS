@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:УчетСИЗ"
         mc:Ignorable="d"
-        Title="Управление пользователями" Height="450" Width="800">
+        Title="Управление пользователями" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,20 +14,21 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10">
-            <TextBox x:Name="FilterTextBox" Width="200" Margin="0 0 10 0"
-                     TextChanged="FilterTextBox_TextChanged"/>
-            <Button Content="Сбросить фильтр" Click="ResetFilter_Click"/>
+            <TextBox x:Name="FilterTextBox" Width="200" Margin="0 0 10 0" TextChanged="FilterTextBox_TextChanged"/>
+            <Button Content="Сбросить фильтр" Click="ResetFilter_Click" Margin="0 0 10 0"/>
+            <Button x:Name="OutButton" Content="Выйти" HorizontalAlignment="Right" Click="OutButton_Click"/>
         </StackPanel>
 
         <DataGrid x:Name="UsersGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" SelectionChanged="UsersGrid_SelectionChanged" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
                 <DataGridTextColumn Header="Логин" Binding="{Binding Login}"/>
+                <DataGridTextColumn Header="Пароль" Binding="{Binding Password}"/>
                 <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}"/>
                 <DataGridTextColumn Header="Роль" Binding="{Binding Rolename}"/>
                 <DataGridTextColumn Header="Последний вход" Binding="{Binding LastLoginDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"/>
-                <DataGridTextColumn Header="Дата создания" Binding="{Binding LastLoginDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"/>
-                <DataGridTextColumn Header="Дата изменения" Binding="{Binding LastLoginDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"/>
+                <DataGridTextColumn Header="Дата создания" Binding="{Binding CreatedDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"/>
+                <DataGridTextColumn Header="Дата изменения" Binding="{Binding UpdateDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"/>
             </DataGrid.Columns>
         </DataGrid>
 

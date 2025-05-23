@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,64 +22,71 @@ namespace УчетСИЗ.ViewModels
     /// </summary>
     public partial class AddUserWindow : Window
     {
+        private readonly string _connectionString = DatabaseHelper.GetConnectionString();
+
         public AddUserWindow()
         {
             InitializeComponent();
+            LoadRoles();
         }
 
         private void LoadRoles()
         {
-            using (var db = new БелкаФаворитСпичечнаяФабрикаБазаДанныхEntities())
-            {
-                RoleComboBox.ItemsSource = db.Роль.ToList();
-                RoleComboBox.DisplayMemberPath = "Наименование";
-                RoleComboBox.SelectedValuePath = "id_Роли";
-                User user = new User(0);
-                if (User != null && User.Role > 0)
-                {
-                    RoleComboBox.SelectedValue = User.Role;
-                }
-            }
-        }
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
             try
             {
-                using (var db = new БелкаФаворитСпичечнаяФабрикаБазаДанныхEntities())
+                using (var connection = new SqlConnection(_connectionString))
                 {
-                    // Создаем новый объект пользователя
-                    var newUser = new Пользователи
-                    {
-                        Логин = LoginTextBox.Text,
-                        Пароль = PasswordTextBox.Text,
-                        Фамилия_сотрудника = SurnameTextBox.Text,
-                        Имя_сотрудника = FirstnameTextBox.Text,
-                        Отчество_сотрудника = LastnameTextBox.Text,
-                        id_роли = (int)ComboBox.item, 
-                        Дата_создания = DateTime.Now,
-                        Дата_изменения = DateTime.Now
-                    };
+                    var command = new SqlCommand("SELECT id_Роли, Наименование FROM Роль", connection);
+                    var adapter = new SqlDataAdapter(command);
+                    var dt = new DataTable();
+                    adapter.Fill(dt);
 
-                    // Добавляем в контекст
-                    db.Пользователи.Add(newUser);
-
-                    // Сохраняем изменения
-                    db.SaveChanges();
-
-                    MessageBox.Show("Пользователь успешно добавлен!", "Успех",
-                                  MessageBoxButton.OK, MessageBoxImage.Information);
+                    RoleComboBox.DisplayMemberPath = "Наименование";
+                    RoleComboBox.SelectedValuePath = "id_Роли";
+                    RoleComboBox.ItemsSource = dt.DefaultView;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при добавлении пользователя: {ex.Message}",
-                               "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Ошибка при загрузке ролей: {ex.Message}");
+            }
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(LoginTextBox.Text) ||string.IsNullOrWhiteSpace(PasswordTextBox.Text) ||RoleComboBox.SelectedValue == null)
+            {
+                MessageBox.Show("Заполните обязательные поля: Логин, Пароль и Роль");
+                return;
+            }
+
+            var newUser = new User
+            {
+                Login = LoginTextBox.Text,
+                Password = PasswordTextBox.Text,
+                Surname = SurnameTextBox.Text,
+                Firstname = FirstnameTextBox.Text,
+                Lastname = LastnameTextBox.Text,
+                Role = (int)RoleComboBox.SelectedValue
+            };
+
+            try
+            {
+                int userId = User.AddUser(newUser);
+                MessageBox.Show($"Пользователь успешно добавлен с ID: {userId}");
+                DialogResult = true;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при добавлении пользователя: {ex.Message}");
             }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-
+            DialogResult = false;
+            this.Close();
         }
     }
 }

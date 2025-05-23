@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\$Производственная ПМ11\Git\PM11-PPE-SIS\App.xaml
-51614353709
+15212570692
 21864639295
-26-1729983808
-18582650089
-MainWindow.xaml;ViewModels\AccountantWindow.xaml;ViewModels\AddUserWindow.xaml;ViewModels\EditUserWindow.xaml;ViewModels\LoginWindow.xaml;
+49-1962198429
+19-865020587
+MainWindow.xaml;ViewModels\AccountantWindow.xaml;ViewModels\AddEditDermatologWindow.xaml;ViewModels\AddEditEmployeeWindow.xaml;ViewModels\AddEditInfraWindow.xaml;ViewModels\AddEditNormaWindow.xaml;ViewModels\AddEditProfWindow.xaml;ViewModels\AddEditSeasonWindow.xaml;ViewModels\AddEditSIZTypeWindow.xaml;ViewModels\AddEditSIZWindow.xaml;ViewModels\AddEditVydachaWindow.xaml;ViewModels\AddUserWindow.xaml;ViewModels\EditUserWindow.xaml;ViewModels\LoginWindow.xaml;ViewModels\ManagerWindow.xaml;
 
-True
+False
 

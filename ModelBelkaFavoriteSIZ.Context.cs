@@ -12,6 +12,8 @@ namespace УчетСИЗ
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class БелкаФаворитСпичечнаяФабрикаБазаДанныхEntities : DbContext
     {
@@ -36,5 +38,635 @@ namespace УчетСИЗ
         public virtual DbSet<СИЗ> СИЗ { get; set; }
         public virtual DbSet<Сотрудник> Сотрудник { get; set; }
         public virtual DbSet<ТипСИЗ> ТипСИЗ { get; set; }
+    
+        public virtual int sp_ДобавитьВыдачу(Nullable<int> id_сотрудника, Nullable<int> id_сиз, Nullable<int> количество, Nullable<System.DateTime> срок_износа, Nullable<int> кем_создана)
+        {
+            var id_сотрудникаParameter = id_сотрудника.HasValue ?
+                new ObjectParameter("id_сотрудника", id_сотрудника) :
+                new ObjectParameter("id_сотрудника", typeof(int));
+    
+            var id_сизParameter = id_сиз.HasValue ?
+                new ObjectParameter("id_сиз", id_сиз) :
+                new ObjectParameter("id_сиз", typeof(int));
+    
+            var количествоParameter = количество.HasValue ?
+                new ObjectParameter("количество", количество) :
+                new ObjectParameter("количество", typeof(int));
+    
+            var срок_износаParameter = срок_износа.HasValue ?
+                new ObjectParameter("Срок_износа", срок_износа) :
+                new ObjectParameter("Срок_износа", typeof(System.DateTime));
+    
+            var кем_созданаParameter = кем_создана.HasValue ?
+                new ObjectParameter("Кем_создана", кем_создана) :
+                new ObjectParameter("Кем_создана", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ДобавитьВыдачу", id_сотрудникаParameter, id_сизParameter, количествоParameter, срок_износаParameter, кем_созданаParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> sp_ДобавитьПользователя(string логин, string пароль, Nullable<int> id_роли, string фамилия_сотрудника, string имя_сотрудника, string отчество_сотрудника)
+        {
+            var логинParameter = логин != null ?
+                new ObjectParameter("Логин", логин) :
+                new ObjectParameter("Логин", typeof(string));
+    
+            var парольParameter = пароль != null ?
+                new ObjectParameter("Пароль", пароль) :
+                new ObjectParameter("Пароль", typeof(string));
+    
+            var id_ролиParameter = id_роли.HasValue ?
+                new ObjectParameter("id_роли", id_роли) :
+                new ObjectParameter("id_роли", typeof(int));
+    
+            var фамилия_сотрудникаParameter = фамилия_сотрудника != null ?
+                new ObjectParameter("Фамилия_сотрудника", фамилия_сотрудника) :
+                new ObjectParameter("Фамилия_сотрудника", typeof(string));
+    
+            var имя_сотрудникаParameter = имя_сотрудника != null ?
+                new ObjectParameter("Имя_сотрудника", имя_сотрудника) :
+                new ObjectParameter("Имя_сотрудника", typeof(string));
+    
+            var отчество_сотрудникаParameter = отчество_сотрудника != null ?
+                new ObjectParameter("Отчество_сотрудника", отчество_сотрудника) :
+                new ObjectParameter("Отчество_сотрудника", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_ДобавитьПользователя", логинParameter, парольParameter, id_ролиParameter, фамилия_сотрудникаParameter, имя_сотрудникаParameter, отчество_сотрудникаParameter);
+        }
+    
+        public virtual int sp_AddДерматологическоеСредство(string наименование, string норма, Nullable<int> id_профессии)
+        {
+            var наименованиеParameter = наименование != null ?
+                new ObjectParameter("Наименование", наименование) :
+                new ObjectParameter("Наименование", typeof(string));
+    
+            var нормаParameter = норма != null ?
+                new ObjectParameter("Норма", норма) :
+                new ObjectParameter("Норма", typeof(string));
+    
+            var id_профессииParameter = id_профессии.HasValue ?
+                new ObjectParameter("id_профессии", id_профессии) :
+                new ObjectParameter("id_профессии", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AddДерматологическоеСредство", наименованиеParameter, нормаParameter, id_профессииParameter);
+        }
+    
+        public virtual int sp_AddИнфраструктура(string наименование, string описание)
+        {
+            var наименованиеParameter = наименование != null ?
+                new ObjectParameter("Наименование", наименование) :
+                new ObjectParameter("Наименование", typeof(string));
+    
+            var описаниеParameter = описание != null ?
+                new ObjectParameter("Описание", описание) :
+                new ObjectParameter("Описание", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AddИнфраструктура", наименованиеParameter, описаниеParameter);
+        }
+    
+        public virtual int sp_AddНормаВыдачи(Nullable<int> id_профессии, Nullable<int> id_сиз, string норма_в_единицах_измерения, string период, Nullable<int> сезон, string основание_назначения)
+        {
+            var id_профессииParameter = id_профессии.HasValue ?
+                new ObjectParameter("id_профессии", id_профессии) :
+                new ObjectParameter("id_профессии", typeof(int));
+    
+            var id_сизParameter = id_сиз.HasValue ?
+                new ObjectParameter("id_сиз", id_сиз) :
+                new ObjectParameter("id_сиз", typeof(int));
+    
+            var норма_в_единицах_измеренияParameter = норма_в_единицах_измерения != null ?
+                new ObjectParameter("Норма_в_единицах_измерения", норма_в_единицах_измерения) :
+                new ObjectParameter("Норма_в_единицах_измерения", typeof(string));
+    
+            var периодParameter = период != null ?
+                new ObjectParameter("Период", период) :
+                new ObjectParameter("Период", typeof(string));
+    
+            var сезонParameter = сезон.HasValue ?
+                new ObjectParameter("Сезон", сезон) :
+                new ObjectParameter("Сезон", typeof(int));
+    
+            var основание_назначенияParameter = основание_назначения != null ?
+                new ObjectParameter("Основание_назначения", основание_назначения) :
+                new ObjectParameter("Основание_назначения", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AddНормаВыдачи", id_профессииParameter, id_сизParameter, норма_в_единицах_измеренияParameter, периодParameter, сезонParameter, основание_назначенияParameter);
+        }
+    
+        public virtual int sp_AddПрофессия(string наименование, string код_по_нормативу, Nullable<int> id_инфраструктуры_или_отдела)
+        {
+            var наименованиеParameter = наименование != null ?
+                new ObjectParameter("Наименование", наименование) :
+                new ObjectParameter("Наименование", typeof(string));
+    
+            var код_по_нормативуParameter = код_по_нормативу != null ?
+                new ObjectParameter("Код_по_нормативу", код_по_нормативу) :
+                new ObjectParameter("Код_по_нормативу", typeof(string));
+    
+            var id_инфраструктуры_или_отделаParameter = id_инфраструктуры_или_отдела.HasValue ?
+                new ObjectParameter("id_инфраструктуры_или_отдела", id_инфраструктуры_или_отдела) :
+                new ObjectParameter("id_инфраструктуры_или_отдела", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AddПрофессия", наименованиеParameter, код_по_нормативуParameter, id_инфраструктуры_или_отделаParameter);
+        }
+    
+        public virtual int sp_AddСезон(string наименование)
+        {
+            var наименованиеParameter = наименование != null ?
+                new ObjectParameter("Наименование", наименование) :
+                new ObjectParameter("Наименование", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AddСезон", наименованиеParameter);
+        }
+    
+        public virtual int sp_AddСИЗ(string наименование, string единица_измерения, Nullable<int> id_типаСИЗ)
+        {
+            var наименованиеParameter = наименование != null ?
+                new ObjectParameter("Наименование", наименование) :
+                new ObjectParameter("Наименование", typeof(string));
+    
+            var единица_измеренияParameter = единица_измерения != null ?
+                new ObjectParameter("Единица_измерения", единица_измерения) :
+                new ObjectParameter("Единица_измерения", typeof(string));
+    
+            var id_типаСИЗParameter = id_типаСИЗ.HasValue ?
+                new ObjectParameter("id_типаСИЗ", id_типаСИЗ) :
+                new ObjectParameter("id_типаСИЗ", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AddСИЗ", наименованиеParameter, единица_измеренияParameter, id_типаСИЗParameter);
+        }
+    
+        public virtual int sp_AddСотрудник(string фамилия, string имя, string отчество, Nullable<int> id_профессии)
+        {
+            var фамилияParameter = фамилия != null ?
+                new ObjectParameter("Фамилия", фамилия) :
+                new ObjectParameter("Фамилия", typeof(string));
+    
+            var имяParameter = имя != null ?
+                new ObjectParameter("Имя", имя) :
+                new ObjectParameter("Имя", typeof(string));
+    
+            var отчествоParameter = отчество != null ?
+                new ObjectParameter("Отчество", отчество) :
+                new ObjectParameter("Отчество", typeof(string));
+    
+            var id_профессииParameter = id_профессии.HasValue ?
+                new ObjectParameter("id_профессии", id_профессии) :
+                new ObjectParameter("id_профессии", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AddСотрудник", фамилияParameter, имяParameter, отчествоParameter, id_профессииParameter);
+        }
+    
+        public virtual int sp_AddТипСИЗ(string наименование, string описание)
+        {
+            var наименованиеParameter = наименование != null ?
+                new ObjectParameter("Наименование", наименование) :
+                new ObjectParameter("Наименование", typeof(string));
+    
+            var описаниеParameter = описание != null ?
+                new ObjectParameter("Описание", описание) :
+                new ObjectParameter("Описание", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AddТипСИЗ", наименованиеParameter, описаниеParameter);
+        }
+    
+        public virtual int sp_DeleteВыдача(Nullable<int> id_Выдачи)
+        {
+            var id_ВыдачиParameter = id_Выдачи.HasValue ?
+                new ObjectParameter("id_Выдачи", id_Выдачи) :
+                new ObjectParameter("id_Выдачи", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteВыдача", id_ВыдачиParameter);
+        }
+    
+        public virtual int sp_DeleteДерматологическоеСредство(Nullable<int> id_ДерматологическогоСредства)
+        {
+            var id_ДерматологическогоСредстваParameter = id_ДерматологическогоСредства.HasValue ?
+                new ObjectParameter("id_ДерматологическогоСредства", id_ДерматологическогоСредства) :
+                new ObjectParameter("id_ДерматологическогоСредства", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteДерматологическоеСредство", id_ДерматологическогоСредстваParameter);
+        }
+    
+        public virtual int sp_DeleteИнфраструктура(Nullable<int> id_Инфраструктуры)
+        {
+            var id_ИнфраструктурыParameter = id_Инфраструктуры.HasValue ?
+                new ObjectParameter("id_Инфраструктуры", id_Инфраструктуры) :
+                new ObjectParameter("id_Инфраструктуры", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteИнфраструктура", id_ИнфраструктурыParameter);
+        }
+    
+        public virtual int sp_DeleteНормаВыдачи(Nullable<int> id_Нормы)
+        {
+            var id_НормыParameter = id_Нормы.HasValue ?
+                new ObjectParameter("id_Нормы", id_Нормы) :
+                new ObjectParameter("id_Нормы", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteНормаВыдачи", id_НормыParameter);
+        }
+    
+        public virtual int sp_DeleteПрофессия(Nullable<int> id_Профессии_или_должности)
+        {
+            var id_Профессии_или_должностиParameter = id_Профессии_или_должности.HasValue ?
+                new ObjectParameter("id_Профессии_или_должности", id_Профессии_или_должности) :
+                new ObjectParameter("id_Профессии_или_должности", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteПрофессия", id_Профессии_или_должностиParameter);
+        }
+    
+        public virtual int sp_DeleteСезон(Nullable<int> id_Сезона)
+        {
+            var id_СезонаParameter = id_Сезона.HasValue ?
+                new ObjectParameter("id_Сезона", id_Сезона) :
+                new ObjectParameter("id_Сезона", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteСезон", id_СезонаParameter);
+        }
+    
+        public virtual int sp_DeleteСИЗ(Nullable<int> id_СИЗ)
+        {
+            var id_СИЗParameter = id_СИЗ.HasValue ?
+                new ObjectParameter("id_СИЗ", id_СИЗ) :
+                new ObjectParameter("id_СИЗ", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteСИЗ", id_СИЗParameter);
+        }
+    
+        public virtual int sp_DeleteСотрудник(Nullable<int> id_Сотрудника)
+        {
+            var id_СотрудникаParameter = id_Сотрудника.HasValue ?
+                new ObjectParameter("id_Сотрудника", id_Сотрудника) :
+                new ObjectParameter("id_Сотрудника", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteСотрудник", id_СотрудникаParameter);
+        }
+    
+        public virtual int sp_DeleteТипСИЗ(Nullable<int> id_Типа)
+        {
+            var id_ТипаParameter = id_Типа.HasValue ?
+                new ObjectParameter("id_Типа", id_Типа) :
+                new ObjectParameter("id_Типа", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteТипСИЗ", id_ТипаParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetВыдача_Result> sp_GetВыдача(string filter)
+        {
+            var filterParameter = filter != null ?
+                new ObjectParameter("filter", filter) :
+                new ObjectParameter("filter", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetВыдача_Result>("sp_GetВыдача", filterParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetДерматологическоеСредство_Result> sp_GetДерматологическоеСредство(string filter)
+        {
+            var filterParameter = filter != null ?
+                new ObjectParameter("filter", filter) :
+                new ObjectParameter("filter", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetДерматологическоеСредство_Result>("sp_GetДерматологическоеСредство", filterParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetИнфраструктура_Result> sp_GetИнфраструктура(string filter)
+        {
+            var filterParameter = filter != null ?
+                new ObjectParameter("filter", filter) :
+                new ObjectParameter("filter", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetИнфраструктура_Result>("sp_GetИнфраструктура", filterParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetНормаВыдачи_Result> sp_GetНормаВыдачи(string filter)
+        {
+            var filterParameter = filter != null ?
+                new ObjectParameter("filter", filter) :
+                new ObjectParameter("filter", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetНормаВыдачи_Result>("sp_GetНормаВыдачи", filterParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetПрофессия_Result> sp_GetПрофессия(string filter)
+        {
+            var filterParameter = filter != null ?
+                new ObjectParameter("filter", filter) :
+                new ObjectParameter("filter", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetПрофессия_Result>("sp_GetПрофессия", filterParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetСезон_Result> sp_GetСезон(string filter)
+        {
+            var filterParameter = filter != null ?
+                new ObjectParameter("filter", filter) :
+                new ObjectParameter("filter", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetСезон_Result>("sp_GetСезон", filterParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetСИЗ_Result> sp_GetСИЗ(string filter)
+        {
+            var filterParameter = filter != null ?
+                new ObjectParameter("filter", filter) :
+                new ObjectParameter("filter", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetСИЗ_Result>("sp_GetСИЗ", filterParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetСотрудник_Result> sp_GetСотрудник(string filter)
+        {
+            var filterParameter = filter != null ?
+                new ObjectParameter("filter", filter) :
+                new ObjectParameter("filter", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetСотрудник_Result>("sp_GetСотрудник", filterParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetТипСИЗ_Result> sp_GetТипСИЗ(string filter)
+        {
+            var filterParameter = filter != null ?
+                new ObjectParameter("filter", filter) :
+                new ObjectParameter("filter", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetТипСИЗ_Result>("sp_GetТипСИЗ", filterParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_UpdateВыдача(Nullable<int> id_Выдачи, Nullable<int> id_сотрудника, Nullable<int> id_сиз, Nullable<int> количество, Nullable<System.DateTime> срок_износа, Nullable<int> кем_создана)
+        {
+            var id_ВыдачиParameter = id_Выдачи.HasValue ?
+                new ObjectParameter("id_Выдачи", id_Выдачи) :
+                new ObjectParameter("id_Выдачи", typeof(int));
+    
+            var id_сотрудникаParameter = id_сотрудника.HasValue ?
+                new ObjectParameter("id_сотрудника", id_сотрудника) :
+                new ObjectParameter("id_сотрудника", typeof(int));
+    
+            var id_сизParameter = id_сиз.HasValue ?
+                new ObjectParameter("id_сиз", id_сиз) :
+                new ObjectParameter("id_сиз", typeof(int));
+    
+            var количествоParameter = количество.HasValue ?
+                new ObjectParameter("количество", количество) :
+                new ObjectParameter("количество", typeof(int));
+    
+            var срок_износаParameter = срок_износа.HasValue ?
+                new ObjectParameter("Срок_износа", срок_износа) :
+                new ObjectParameter("Срок_износа", typeof(System.DateTime));
+    
+            var кем_созданаParameter = кем_создана.HasValue ?
+                new ObjectParameter("Кем_создана", кем_создана) :
+                new ObjectParameter("Кем_создана", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateВыдача", id_ВыдачиParameter, id_сотрудникаParameter, id_сизParameter, количествоParameter, срок_износаParameter, кем_созданаParameter);
+        }
+    
+        public virtual int sp_UpdateДерматологическоеСредство(Nullable<int> id_ДерматологическогоСредства, string наименование, string норма, Nullable<int> id_профессии)
+        {
+            var id_ДерматологическогоСредстваParameter = id_ДерматологическогоСредства.HasValue ?
+                new ObjectParameter("id_ДерматологическогоСредства", id_ДерматологическогоСредства) :
+                new ObjectParameter("id_ДерматологическогоСредства", typeof(int));
+    
+            var наименованиеParameter = наименование != null ?
+                new ObjectParameter("Наименование", наименование) :
+                new ObjectParameter("Наименование", typeof(string));
+    
+            var нормаParameter = норма != null ?
+                new ObjectParameter("Норма", норма) :
+                new ObjectParameter("Норма", typeof(string));
+    
+            var id_профессииParameter = id_профессии.HasValue ?
+                new ObjectParameter("id_профессии", id_профессии) :
+                new ObjectParameter("id_профессии", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateДерматологическоеСредство", id_ДерматологическогоСредстваParameter, наименованиеParameter, нормаParameter, id_профессииParameter);
+        }
+    
+        public virtual int sp_UpdateИнфраструктура(Nullable<int> id_Инфраструктуры, string наименование, string описание)
+        {
+            var id_ИнфраструктурыParameter = id_Инфраструктуры.HasValue ?
+                new ObjectParameter("id_Инфраструктуры", id_Инфраструктуры) :
+                new ObjectParameter("id_Инфраструктуры", typeof(int));
+    
+            var наименованиеParameter = наименование != null ?
+                new ObjectParameter("Наименование", наименование) :
+                new ObjectParameter("Наименование", typeof(string));
+    
+            var описаниеParameter = описание != null ?
+                new ObjectParameter("Описание", описание) :
+                new ObjectParameter("Описание", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateИнфраструктура", id_ИнфраструктурыParameter, наименованиеParameter, описаниеParameter);
+        }
+    
+        public virtual int sp_UpdateНормаВыдачи(Nullable<int> id_Нормы, Nullable<int> id_профессии, Nullable<int> id_сиз, string норма_в_единицах_измерения, string период, Nullable<int> сезон, string основание_назначения)
+        {
+            var id_НормыParameter = id_Нормы.HasValue ?
+                new ObjectParameter("id_Нормы", id_Нормы) :
+                new ObjectParameter("id_Нормы", typeof(int));
+    
+            var id_профессииParameter = id_профессии.HasValue ?
+                new ObjectParameter("id_профессии", id_профессии) :
+                new ObjectParameter("id_профессии", typeof(int));
+    
+            var id_сизParameter = id_сиз.HasValue ?
+                new ObjectParameter("id_сиз", id_сиз) :
+                new ObjectParameter("id_сиз", typeof(int));
+    
+            var норма_в_единицах_измеренияParameter = норма_в_единицах_измерения != null ?
+                new ObjectParameter("Норма_в_единицах_измерения", норма_в_единицах_измерения) :
+                new ObjectParameter("Норма_в_единицах_измерения", typeof(string));
+    
+            var периодParameter = период != null ?
+                new ObjectParameter("Период", период) :
+                new ObjectParameter("Период", typeof(string));
+    
+            var сезонParameter = сезон.HasValue ?
+                new ObjectParameter("Сезон", сезон) :
+                new ObjectParameter("Сезон", typeof(int));
+    
+            var основание_назначенияParameter = основание_назначения != null ?
+                new ObjectParameter("Основание_назначения", основание_назначения) :
+                new ObjectParameter("Основание_назначения", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateНормаВыдачи", id_НормыParameter, id_профессииParameter, id_сизParameter, норма_в_единицах_измеренияParameter, периодParameter, сезонParameter, основание_назначенияParameter);
+        }
+    
+        public virtual int sp_UpdateПрофессия(Nullable<int> id_Профессии_или_должности, string наименование, string код_по_нормативу, Nullable<int> id_инфраструктуры_или_отдела)
+        {
+            var id_Профессии_или_должностиParameter = id_Профессии_или_должности.HasValue ?
+                new ObjectParameter("id_Профессии_или_должности", id_Профессии_или_должности) :
+                new ObjectParameter("id_Профессии_или_должности", typeof(int));
+    
+            var наименованиеParameter = наименование != null ?
+                new ObjectParameter("Наименование", наименование) :
+                new ObjectParameter("Наименование", typeof(string));
+    
+            var код_по_нормативуParameter = код_по_нормативу != null ?
+                new ObjectParameter("Код_по_нормативу", код_по_нормативу) :
+                new ObjectParameter("Код_по_нормативу", typeof(string));
+    
+            var id_инфраструктуры_или_отделаParameter = id_инфраструктуры_или_отдела.HasValue ?
+                new ObjectParameter("id_инфраструктуры_или_отдела", id_инфраструктуры_или_отдела) :
+                new ObjectParameter("id_инфраструктуры_или_отдела", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateПрофессия", id_Профессии_или_должностиParameter, наименованиеParameter, код_по_нормативуParameter, id_инфраструктуры_или_отделаParameter);
+        }
+    
+        public virtual int sp_UpdateСезон(Nullable<int> id_Сезона, string наименование)
+        {
+            var id_СезонаParameter = id_Сезона.HasValue ?
+                new ObjectParameter("id_Сезона", id_Сезона) :
+                new ObjectParameter("id_Сезона", typeof(int));
+    
+            var наименованиеParameter = наименование != null ?
+                new ObjectParameter("Наименование", наименование) :
+                new ObjectParameter("Наименование", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateСезон", id_СезонаParameter, наименованиеParameter);
+        }
+    
+        public virtual int sp_UpdateСИЗ(Nullable<int> id_СИЗ, string наименование, string единица_измерения, Nullable<int> id_типаСИЗ)
+        {
+            var id_СИЗParameter = id_СИЗ.HasValue ?
+                new ObjectParameter("id_СИЗ", id_СИЗ) :
+                new ObjectParameter("id_СИЗ", typeof(int));
+    
+            var наименованиеParameter = наименование != null ?
+                new ObjectParameter("Наименование", наименование) :
+                new ObjectParameter("Наименование", typeof(string));
+    
+            var единица_измеренияParameter = единица_измерения != null ?
+                new ObjectParameter("Единица_измерения", единица_измерения) :
+                new ObjectParameter("Единица_измерения", typeof(string));
+    
+            var id_типаСИЗParameter = id_типаСИЗ.HasValue ?
+                new ObjectParameter("id_типаСИЗ", id_типаСИЗ) :
+                new ObjectParameter("id_типаСИЗ", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateСИЗ", id_СИЗParameter, наименованиеParameter, единица_измеренияParameter, id_типаСИЗParameter);
+        }
+    
+        public virtual int sp_UpdateСотрудник(Nullable<int> id_Сотрудника, string фамилия, string имя, string отчество, Nullable<int> id_профессии)
+        {
+            var id_СотрудникаParameter = id_Сотрудника.HasValue ?
+                new ObjectParameter("id_Сотрудника", id_Сотрудника) :
+                new ObjectParameter("id_Сотрудника", typeof(int));
+    
+            var фамилияParameter = фамилия != null ?
+                new ObjectParameter("Фамилия", фамилия) :
+                new ObjectParameter("Фамилия", typeof(string));
+    
+            var имяParameter = имя != null ?
+                new ObjectParameter("Имя", имя) :
+                new ObjectParameter("Имя", typeof(string));
+    
+            var отчествоParameter = отчество != null ?
+                new ObjectParameter("Отчество", отчество) :
+                new ObjectParameter("Отчество", typeof(string));
+    
+            var id_профессииParameter = id_профессии.HasValue ?
+                new ObjectParameter("id_профессии", id_профессии) :
+                new ObjectParameter("id_профессии", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateСотрудник", id_СотрудникаParameter, фамилияParameter, имяParameter, отчествоParameter, id_профессииParameter);
+        }
+    
+        public virtual int sp_UpdateТипСИЗ(Nullable<int> id_Типа, string наименование, string описание)
+        {
+            var id_ТипаParameter = id_Типа.HasValue ?
+                new ObjectParameter("id_Типа", id_Типа) :
+                new ObjectParameter("id_Типа", typeof(int));
+    
+            var наименованиеParameter = наименование != null ?
+                new ObjectParameter("Наименование", наименование) :
+                new ObjectParameter("Наименование", typeof(string));
+    
+            var описаниеParameter = описание != null ?
+                new ObjectParameter("Описание", описание) :
+                new ObjectParameter("Описание", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateТипСИЗ", id_ТипаParameter, наименованиеParameter, описаниеParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual int sp_ОбновитьПользователя(Nullable<int> id_Пользователя, string логин, string пароль, Nullable<int> id_роли, string фамилия_сотрудника, string имя_сотрудника, string отчество_сотрудника)
+        {
+            var id_ПользователяParameter = id_Пользователя.HasValue ?
+                new ObjectParameter("id_Пользователя", id_Пользователя) :
+                new ObjectParameter("id_Пользователя", typeof(int));
+    
+            var логинParameter = логин != null ?
+                new ObjectParameter("Логин", логин) :
+                new ObjectParameter("Логин", typeof(string));
+    
+            var парольParameter = пароль != null ?
+                new ObjectParameter("Пароль", пароль) :
+                new ObjectParameter("Пароль", typeof(string));
+    
+            var id_ролиParameter = id_роли.HasValue ?
+                new ObjectParameter("id_роли", id_роли) :
+                new ObjectParameter("id_роли", typeof(int));
+    
+            var фамилия_сотрудникаParameter = фамилия_сотрудника != null ?
+                new ObjectParameter("Фамилия_сотрудника", фамилия_сотрудника) :
+                new ObjectParameter("Фамилия_сотрудника", typeof(string));
+    
+            var имя_сотрудникаParameter = имя_сотрудника != null ?
+                new ObjectParameter("Имя_сотрудника", имя_сотрудника) :
+                new ObjectParameter("Имя_сотрудника", typeof(string));
+    
+            var отчество_сотрудникаParameter = отчество_сотрудника != null ?
+                new ObjectParameter("Отчество_сотрудника", отчество_сотрудника) :
+                new ObjectParameter("Отчество_сотрудника", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ОбновитьПользователя", id_ПользователяParameter, логинParameter, парольParameter, id_ролиParameter, фамилия_сотрудникаParameter, имя_сотрудникаParameter, отчество_сотрудникаParameter);
+        }
     }
 }

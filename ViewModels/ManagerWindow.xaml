@@ -1,0 +1,321 @@
+﻿<Window x:Class="УчетСИЗ.ViewModels.ManagerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:УчетСИЗ.ViewModels"
+        mc:Ignorable="d"
+        Title="Окно менеджера" Height="600" Width="900" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <TabControl>
+            <!-- Вкладка для Выдачи -->
+            <TabItem Header="Выдача">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBox x:Name="VydachaFilterTextBox" Width="200" Margin="0 0 10 0" TextChanged="VydachaFilterTextBox_TextChanged"/>
+                        <Button Content="Сбросить фильтр" Click="VydachaResetFilter_Click" Margin="0 0 10 0"/>
+                        <Button x:Name="VydachaOutButton" Content="Выйти" HorizontalAlignment="Right" Click="OutButton_Click"/>
+                    </StackPanel>
+
+                    <DataGrid x:Name="VydachaGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" 
+                              SelectionMode="Single" SelectionChanged="VydachaGrid_SelectionChanged" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                            <DataGridTextColumn Header="Сотрудник" Binding="{Binding EmployeeName}"/>
+                            <DataGridTextColumn Header="СИЗ" Binding="{Binding SIZName}"/>
+                            <DataGridTextColumn Header="Дата выдачи" Binding="{Binding IssueDate, StringFormat={}{0:dd.MM.yyyy}}"/>
+                            <DataGridTextColumn Header="Количество" Binding="{Binding Quantity}"/>
+                            <DataGridTextColumn Header="Срок износа" Binding="{Binding WearPeriod, StringFormat={}{0:dd.MM.yyyy}}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
+                        <Button Content="Добавить" Width="100" Margin="0 0 10 0" Click="VydachaAdd_Click"/>
+                        <Button Content="Редактировать" Width="100" Margin="0 0 10 0" 
+                                Click="VydachaEdit_Click" x:Name="VydachaEditButton" IsEnabled="False"/>
+                        <Button Content="Удалить" Width="100" Click="VydachaDelete_Click" 
+                                x:Name="VydachaDeleteButton" IsEnabled="False"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка для Дерматологических средств -->
+            <TabItem Header="Дерматологические средства">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBox x:Name="DermatologFilterTextBox" Width="200" Margin="0 0 10 0" TextChanged="DermatologFilterTextBox_TextChanged"/>
+                        <Button Content="Сбросить фильтр" Click="DermatologResetFilter_Click" Margin="0 0 10 0"/>
+                    </StackPanel>
+
+                    <DataGrid x:Name="DermatologGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" 
+                              SelectionMode="Single" SelectionChanged="DermatologGrid_SelectionChanged" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                            <DataGridTextColumn Header="Профессия" Binding="{Binding ProfessionName}"/>
+                            <DataGridTextColumn Header="Наименование" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Норма" Binding="{Binding Norm}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
+                        <Button Content="Добавить" Width="100" Margin="0 0 10 0" Click="DermatologAdd_Click"/>
+                        <Button Content="Редактировать" Width="100" Margin="0 0 10 0" 
+                                Click="DermatologEdit_Click" x:Name="DermatologEditButton" IsEnabled="False"/>
+                        <Button Content="Удалить" Width="100" Click="DermatologDelete_Click" 
+                                x:Name="DermatologDeleteButton" IsEnabled="False"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка для Инфраструктуры -->
+            <TabItem Header="Инфраструктура">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBox x:Name="InfraFilterTextBox" Width="200" Margin="0 0 10 0" TextChanged="InfraFilterTextBox_TextChanged"/>
+                        <Button Content="Сбросить фильтр" Click="InfraResetFilter_Click" Margin="0 0 10 0"/>
+                    </StackPanel>
+
+                    <DataGrid x:Name="InfraGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" 
+                              SelectionMode="Single" SelectionChanged="InfraGrid_SelectionChanged" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                            <DataGridTextColumn Header="Наименование" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
+                        <Button Content="Добавить" Width="100" Margin="0 0 10 0" Click="InfraAdd_Click"/>
+                        <Button Content="Редактировать" Width="100" Margin="0 0 10 0" 
+                                Click="InfraEdit_Click" x:Name="InfraEditButton" IsEnabled="False"/>
+                        <Button Content="Удалить" Width="100" Click="InfraDelete_Click" 
+                                x:Name="InfraDeleteButton" IsEnabled="False"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка для Нормы выдачи -->
+            <TabItem Header="Нормы выдачи">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBox x:Name="NormaFilterTextBox" Width="200" Margin="0 0 10 0" TextChanged="NormaFilterTextBox_TextChanged"/>
+                        <Button Content="Сбросить фильтр" Click="NormaResetFilter_Click" Margin="0 0 10 0"/>
+                    </StackPanel>
+
+                    <DataGrid x:Name="NormaGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" 
+                              SelectionMode="Single" SelectionChanged="NormaGrid_SelectionChanged" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                            <DataGridTextColumn Header="Профессия" Binding="{Binding ProfessionName}"/>
+                            <DataGridTextColumn Header="СИЗ" Binding="{Binding SIZName}"/>
+                            <DataGridTextColumn Header="Норма" Binding="{Binding Norm}"/>
+                            <DataGridTextColumn Header="Период" Binding="{Binding Period}"/>
+                            <DataGridTextColumn Header="Сезон" Binding="{Binding SeasonName}"/>
+                            <DataGridTextColumn Header="Основание" Binding="{Binding Basis}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
+                        <Button Content="Добавить" Width="100" Margin="0 0 10 0" Click="NormaAdd_Click"/>
+                        <Button Content="Редактировать" Width="100" Margin="0 0 10 0" 
+                                Click="NormaEdit_Click" x:Name="NormaEditButton" IsEnabled="False"/>
+                        <Button Content="Удалить" Width="100" Click="NormaDelete_Click" 
+                                x:Name="NormaDeleteButton" IsEnabled="False"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка для Профессий -->
+            <TabItem Header="Профессии">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBox x:Name="ProfFilterTextBox" Width="200" Margin="0 0 10 0" TextChanged="ProfFilterTextBox_TextChanged"/>
+                        <Button Content="Сбросить фильтр" Click="ProfResetFilter_Click" Margin="0 0 10 0"/>
+                    </StackPanel>
+
+                    <DataGrid x:Name="ProfGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" 
+                              SelectionMode="Single" SelectionChanged="ProfGrid_SelectionChanged" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                            <DataGridTextColumn Header="Наименование" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Код" Binding="{Binding Code}"/>
+                            <DataGridTextColumn Header="Инфраструктура" Binding="{Binding InfrastructureName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
+                        <Button Content="Добавить" Width="100" Margin="0 0 10 0" Click="ProfAdd_Click"/>
+                        <Button Content="Редактировать" Width="100" Margin="0 0 10 0" 
+                                Click="ProfEdit_Click" x:Name="ProfEditButton" IsEnabled="False"/>
+                        <Button Content="Удалить" Width="100" Click="ProfDelete_Click" 
+                                x:Name="ProfDeleteButton" IsEnabled="False"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка для Сезонов -->
+            <TabItem Header="Сезоны">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBox x:Name="SeasonFilterTextBox" Width="200" Margin="0 0 10 0" TextChanged="SeasonFilterTextBox_TextChanged"/>
+                        <Button Content="Сбросить фильтр" Click="SeasonResetFilter_Click" Margin="0 0 10 0"/>
+                    </StackPanel>
+
+                    <DataGrid x:Name="SeasonGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" 
+                              SelectionMode="Single" SelectionChanged="SeasonGrid_SelectionChanged" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                            <DataGridTextColumn Header="Наименование" Binding="{Binding Name}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
+                        <Button Content="Добавить" Width="100" Margin="0 0 10 0" Click="SeasonAdd_Click"/>
+                        <Button Content="Редактировать" Width="100" Margin="0 0 10 0" 
+                                Click="SeasonEdit_Click" x:Name="SeasonEditButton" IsEnabled="False"/>
+                        <Button Content="Удалить" Width="100" Click="SeasonDelete_Click" 
+                                x:Name="SeasonDeleteButton" IsEnabled="False"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка для СИЗ -->
+            <TabItem Header="СИЗ">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBox x:Name="SIZFilterTextBox" Width="200" Margin="0 0 10 0" TextChanged="SIZFilterTextBox_TextChanged"/>
+                        <Button Content="Сбросить фильтр" Click="SIZResetFilter_Click" Margin="0 0 10 0"/>
+                    </StackPanel>
+
+                    <DataGrid x:Name="SIZGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" 
+                              SelectionMode="Single" SelectionChanged="SIZGrid_SelectionChanged" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                            <DataGridTextColumn Header="Наименование" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Тип СИЗ" Binding="{Binding TypeName}"/>
+                            <DataGridTextColumn Header="Единица измерения" Binding="{Binding Unit}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
+                        <Button Content="Добавить" Width="100" Margin="0 0 10 0" Click="SIZAdd_Click"/>
+                        <Button Content="Редактировать" Width="100" Margin="0 0 10 0" 
+                                Click="SIZEdit_Click" x:Name="SIZEditButton" IsEnabled="False"/>
+                        <Button Content="Удалить" Width="100" Click="SIZDelete_Click" 
+                                x:Name="SIZDeleteButton" IsEnabled="False"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка для Сотрудников -->
+            <TabItem Header="Сотрудники">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBox x:Name="EmployeeFilterTextBox" Width="200" Margin="0 0 10 0" TextChanged="EmployeeFilterTextBox_TextChanged"/>
+                        <Button Content="Сбросить фильтр" Click="EmployeeResetFilter_Click" Margin="0 0 10 0"/>
+                    </StackPanel>
+
+                    <DataGrid x:Name="EmployeeGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" 
+                              SelectionMode="Single" SelectionChanged="EmployeeGrid_SelectionChanged" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"/>
+                            <DataGridTextColumn Header="Отчество" Binding="{Binding MiddleName}"/>
+                            <DataGridTextColumn Header="Профессия" Binding="{Binding ProfessionName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
+                        <Button Content="Добавить" Width="100" Margin="0 0 10 0" Click="EmployeeAdd_Click"/>
+                        <Button Content="Редактировать" Width="100" Margin="0 0 10 0" 
+                                Click="EmployeeEdit_Click" x:Name="EmployeeEditButton" IsEnabled="False"/>
+                        <Button Content="Удалить" Width="100" Click="EmployeeDelete_Click" 
+                                x:Name="EmployeeDeleteButton" IsEnabled="False"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка для Типов СИЗ -->
+            <TabItem Header="Типы СИЗ">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBox x:Name="SIZTypeFilterTextBox" Width="200" Margin="0 0 10 0" TextChanged="SIZTypeFilterTextBox_TextChanged"/>
+                        <Button Content="Сбросить фильтр" Click="SIZTypeResetFilter_Click" Margin="0 0 10 0"/>
+                    </StackPanel>
+
+                    <DataGrid x:Name="SIZTypeGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" 
+                              SelectionMode="Single" SelectionChanged="SIZTypeGrid_SelectionChanged" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                            <DataGridTextColumn Header="Наименование" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
+                        <Button Content="Добавить" Width="100" Margin="0 0 10 0" Click="SIZTypeAdd_Click"/>
+                        <Button Content="Редактировать" Width="100" Margin="0 0 10 0" 
+                                Click="SIZTypeEdit_Click" x:Name="SIZTypeEditButton" IsEnabled="False"/>
+                        <Button Content="Удалить" Width="100" Click="SIZTypeDelete_Click" 
+                                x:Name="SIZTypeDeleteButton" IsEnabled="False"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

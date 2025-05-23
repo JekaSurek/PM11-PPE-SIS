@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Выдача">
           <Key>
             <PropertyRef Name="id_Выдачи" />
@@ -34,7 +34,7 @@
           </Key>
           <Property Name="id_Инфраструктуры" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Наименование" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Описание" Type="nchar" MaxLength="10" />
+          <Property Name="Описание" Type="nvarchar" MaxLength="3000" />
         </EntityType>
         <EntityType Name="НормаВыдачи">
           <Key>
@@ -111,8 +111,8 @@
             <PropertyRef Name="id_Типа" />
           </Key>
           <Property Name="id_Типа" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Наименование" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Описание" Type="nchar" MaxLength="10" />
+          <Property Name="Наименование" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Описание" Type="nvarchar" MaxLength="3000" />
         </EntityType>
         <Association Name="FK_Выдача_Пользователи">
           <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
@@ -246,6 +246,194 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_AddДерматологическоеСредство" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+          <Parameter Name="Норма" Type="nvarchar" Mode="In" />
+          <Parameter Name="id_профессии" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_AddИнфраструктура" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+          <Parameter Name="Описание" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_AddНормаВыдачи" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_профессии" Type="int" Mode="In" />
+          <Parameter Name="id_сиз" Type="int" Mode="In" />
+          <Parameter Name="Норма_в_единицах_измерения" Type="varchar" Mode="In" />
+          <Parameter Name="Период" Type="varchar" Mode="In" />
+          <Parameter Name="Сезон" Type="int" Mode="In" />
+          <Parameter Name="Основание_назначения" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_AddПрофессия" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+          <Parameter Name="Код_по_нормативу" Type="nvarchar" Mode="In" />
+          <Parameter Name="id_инфраструктуры_или_отдела" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_AddСезон" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_AddСИЗ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+          <Parameter Name="Единица_измерения" Type="nvarchar" Mode="In" />
+          <Parameter Name="id_типаСИЗ" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_AddСотрудник" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Фамилия" Type="nvarchar" Mode="In" />
+          <Parameter Name="Имя" Type="nvarchar" Mode="In" />
+          <Parameter Name="Отчество" Type="nvarchar" Mode="In" />
+          <Parameter Name="id_профессии" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_AddТипСИЗ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+          <Parameter Name="Описание" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteВыдача" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Выдачи" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteДерматологическоеСредство" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_ДерматологическогоСредства" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteИнфраструктура" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Инфраструктуры" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteНормаВыдачи" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Нормы" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteПрофессия" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Профессии_или_должности" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteСезон" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Сезона" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteСИЗ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_СИЗ" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteСотрудник" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Сотрудника" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteТипСИЗ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Типа" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetВыдача" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="filter" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetДерматологическоеСредство" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="filter" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetИнфраструктура" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="filter" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetНормаВыдачи" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="filter" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetПрофессия" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="filter" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetСезон" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="filter" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetСИЗ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="filter" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetСотрудник" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="filter" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetТипСИЗ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="filter" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateВыдача" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Выдачи" Type="int" Mode="In" />
+          <Parameter Name="id_сотрудника" Type="int" Mode="In" />
+          <Parameter Name="id_сиз" Type="int" Mode="In" />
+          <Parameter Name="количество" Type="int" Mode="In" />
+          <Parameter Name="Срок_износа" Type="date" Mode="In" />
+          <Parameter Name="Кем_создана" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateДерматологическоеСредство" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_ДерматологическогоСредства" Type="int" Mode="In" />
+          <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+          <Parameter Name="Норма" Type="nvarchar" Mode="In" />
+          <Parameter Name="id_профессии" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateИнфраструктура" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Инфраструктуры" Type="int" Mode="In" />
+          <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+          <Parameter Name="Описание" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateНормаВыдачи" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Нормы" Type="int" Mode="In" />
+          <Parameter Name="id_профессии" Type="int" Mode="In" />
+          <Parameter Name="id_сиз" Type="int" Mode="In" />
+          <Parameter Name="Норма_в_единицах_измерения" Type="varchar" Mode="In" />
+          <Parameter Name="Период" Type="varchar" Mode="In" />
+          <Parameter Name="Сезон" Type="int" Mode="In" />
+          <Parameter Name="Основание_назначения" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateПрофессия" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Профессии_или_должности" Type="int" Mode="In" />
+          <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+          <Parameter Name="Код_по_нормативу" Type="nvarchar" Mode="In" />
+          <Parameter Name="id_инфраструктуры_или_отдела" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateСезон" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Сезона" Type="int" Mode="In" />
+          <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateСИЗ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_СИЗ" Type="int" Mode="In" />
+          <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+          <Parameter Name="Единица_измерения" Type="nvarchar" Mode="In" />
+          <Parameter Name="id_типаСИЗ" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateСотрудник" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Сотрудника" Type="int" Mode="In" />
+          <Parameter Name="Фамилия" Type="nvarchar" Mode="In" />
+          <Parameter Name="Имя" Type="nvarchar" Mode="In" />
+          <Parameter Name="Отчество" Type="nvarchar" Mode="In" />
+          <Parameter Name="id_профессии" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateТипСИЗ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Типа" Type="int" Mode="In" />
+          <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+          <Parameter Name="Описание" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_ДобавитьВыдачу" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_сотрудника" Type="int" Mode="In" />
+          <Parameter Name="id_сиз" Type="int" Mode="In" />
+          <Parameter Name="количество" Type="int" Mode="In" />
+          <Parameter Name="Срок_износа" Type="date" Mode="In" />
+          <Parameter Name="Кем_создана" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_ДобавитьПользователя" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Логин" Type="nvarchar" Mode="In" />
+          <Parameter Name="Пароль" Type="nvarchar" Mode="In" />
+          <Parameter Name="id_роли" Type="int" Mode="In" />
+          <Parameter Name="Фамилия_сотрудника" Type="nvarchar" Mode="In" />
+          <Parameter Name="Имя_сотрудника" Type="nvarchar" Mode="In" />
+          <Parameter Name="Отчество_сотрудника" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_ОбновитьПользователя" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Пользователя" Type="int" Mode="In" />
+          <Parameter Name="Логин" Type="nvarchar" Mode="In" />
+          <Parameter Name="Пароль" Type="nvarchar" Mode="In" />
+          <Parameter Name="id_роли" Type="int" Mode="In" />
+          <Parameter Name="Фамилия_сотрудника" Type="nvarchar" Mode="In" />
+          <Parameter Name="Имя_сотрудника" Type="nvarchar" Mode="In" />
+          <Parameter Name="Отчество_сотрудника" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModelContainer">
           <EntitySet Name="Выдача" EntityType="Self.Выдача" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ДерматологическоеСредство" EntityType="Self.ДерматологическоеСредство" Schema="dbo" store:Type="Tables" />
@@ -303,8 +491,7 @@
             <End Role="Сотрудник" EntitySet="Сотрудник" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -341,7 +528,7 @@
           </Key>
           <Property Name="id_Инфраструктуры" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Наименование" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Описание" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Описание" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Профессия" Relationship="Self.FK_Профессия_Инфраструктура" FromRole="Инфраструктура" ToRole="Профессия" />
         </EntityType>
         <EntityType Name="НормаВыдачи">
@@ -435,8 +622,8 @@
             <PropertyRef Name="id_Типа" />
           </Key>
           <Property Name="id_Типа" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Описание" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Наименование" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Описание" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="СИЗ" Relationship="Self.FK_СИЗ_ТипСИЗ" FromRole="ТипСИЗ" ToRole="СИЗ" />
         </EntityType>
         <Association Name="FK_Выдача_Пользователи">
@@ -627,7 +814,272 @@
             <End Role="ТипСИЗ" EntitySet="ТипСИЗ" />
             <End Role="СИЗ" EntitySet="СИЗ" />
           </AssociationSet>
+          <FunctionImport Name="sp_ДобавитьВыдачу">
+            <Parameter Name="id_сотрудника" Mode="In" Type="Int32" />
+            <Parameter Name="id_сиз" Mode="In" Type="Int32" />
+            <Parameter Name="количество" Mode="In" Type="Int32" />
+            <Parameter Name="Срок_износа" Mode="In" Type="DateTime" />
+            <Parameter Name="Кем_создана" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ДобавитьПользователя" ReturnType="Collection(Decimal)">
+            <Parameter Name="Логин" Mode="In" Type="String" />
+            <Parameter Name="Пароль" Mode="In" Type="String" />
+            <Parameter Name="id_роли" Mode="In" Type="Int32" />
+            <Parameter Name="Фамилия_сотрудника" Mode="In" Type="String" />
+            <Parameter Name="Имя_сотрудника" Mode="In" Type="String" />
+            <Parameter Name="Отчество_сотрудника" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_AddДерматологическоеСредство">
+            <Parameter Name="Наименование" Mode="In" Type="String" />
+            <Parameter Name="Норма" Mode="In" Type="String" />
+            <Parameter Name="id_профессии" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_AddИнфраструктура">
+            <Parameter Name="Наименование" Mode="In" Type="String" />
+            <Parameter Name="Описание" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_AddНормаВыдачи">
+            <Parameter Name="id_профессии" Mode="In" Type="Int32" />
+            <Parameter Name="id_сиз" Mode="In" Type="Int32" />
+            <Parameter Name="Норма_в_единицах_измерения" Mode="In" Type="String" />
+            <Parameter Name="Период" Mode="In" Type="String" />
+            <Parameter Name="Сезон" Mode="In" Type="Int32" />
+            <Parameter Name="Основание_назначения" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_AddПрофессия">
+            <Parameter Name="Наименование" Mode="In" Type="String" />
+            <Parameter Name="Код_по_нормативу" Mode="In" Type="String" />
+            <Parameter Name="id_инфраструктуры_или_отдела" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_AddСезон">
+          <Parameter Name="Наименование" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_AddСИЗ">
+            <Parameter Name="Наименование" Mode="In" Type="String" />
+            <Parameter Name="Единица_измерения" Mode="In" Type="String" />
+            <Parameter Name="id_типаСИЗ" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_AddСотрудник">
+            <Parameter Name="Фамилия" Mode="In" Type="String" />
+            <Parameter Name="Имя" Mode="In" Type="String" />
+            <Parameter Name="Отчество" Mode="In" Type="String" />
+            <Parameter Name="id_профессии" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_AddТипСИЗ">
+            <Parameter Name="Наименование" Mode="In" Type="String" />
+            <Parameter Name="Описание" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteВыдача">
+          <Parameter Name="id_Выдачи" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteДерматологическоеСредство">
+          <Parameter Name="id_ДерматологическогоСредства" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteИнфраструктура">
+          <Parameter Name="id_Инфраструктуры" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteНормаВыдачи">
+          <Parameter Name="id_Нормы" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteПрофессия">
+          <Parameter Name="id_Профессии_или_должности" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteСезон">
+          <Parameter Name="id_Сезона" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteСИЗ">
+          <Parameter Name="id_СИЗ" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteСотрудник">
+          <Parameter Name="id_Сотрудника" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteТипСИЗ">
+          <Parameter Name="id_Типа" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetВыдача" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetВыдача_Result)">
+          <Parameter Name="filter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetДерматологическоеСредство" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetДерматологическоеСредство_Result)">
+          <Parameter Name="filter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetИнфраструктура" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetИнфраструктура_Result)">
+          <Parameter Name="filter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetНормаВыдачи" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetНормаВыдачи_Result)">
+          <Parameter Name="filter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetПрофессия" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetПрофессия_Result)">
+          <Parameter Name="filter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetСезон" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСезон_Result)">
+          <Parameter Name="filter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetСИЗ" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСИЗ_Result)">
+          <Parameter Name="filter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetСотрудник" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСотрудник_Result)">
+          <Parameter Name="filter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetТипСИЗ" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetТипСИЗ_Result)">
+          <Parameter Name="filter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateВыдача">
+            <Parameter Name="id_Выдачи" Mode="In" Type="Int32" />
+            <Parameter Name="id_сотрудника" Mode="In" Type="Int32" />
+            <Parameter Name="id_сиз" Mode="In" Type="Int32" />
+            <Parameter Name="количество" Mode="In" Type="Int32" />
+            <Parameter Name="Срок_износа" Mode="In" Type="DateTime" />
+            <Parameter Name="Кем_создана" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateДерматологическоеСредство">
+            <Parameter Name="id_ДерматологическогоСредства" Mode="In" Type="Int32" />
+            <Parameter Name="Наименование" Mode="In" Type="String" />
+            <Parameter Name="Норма" Mode="In" Type="String" />
+            <Parameter Name="id_профессии" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateИнфраструктура">
+            <Parameter Name="id_Инфраструктуры" Mode="In" Type="Int32" />
+            <Parameter Name="Наименование" Mode="In" Type="String" />
+            <Parameter Name="Описание" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateНормаВыдачи">
+            <Parameter Name="id_Нормы" Mode="In" Type="Int32" />
+            <Parameter Name="id_профессии" Mode="In" Type="Int32" />
+            <Parameter Name="id_сиз" Mode="In" Type="Int32" />
+            <Parameter Name="Норма_в_единицах_измерения" Mode="In" Type="String" />
+            <Parameter Name="Период" Mode="In" Type="String" />
+            <Parameter Name="Сезон" Mode="In" Type="Int32" />
+            <Parameter Name="Основание_назначения" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateПрофессия">
+            <Parameter Name="id_Профессии_или_должности" Mode="In" Type="Int32" />
+            <Parameter Name="Наименование" Mode="In" Type="String" />
+            <Parameter Name="Код_по_нормативу" Mode="In" Type="String" />
+            <Parameter Name="id_инфраструктуры_или_отдела" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateСезон">
+            <Parameter Name="id_Сезона" Mode="In" Type="Int32" />
+            <Parameter Name="Наименование" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateСИЗ">
+            <Parameter Name="id_СИЗ" Mode="In" Type="Int32" />
+            <Parameter Name="Наименование" Mode="In" Type="String" />
+            <Parameter Name="Единица_измерения" Mode="In" Type="String" />
+            <Parameter Name="id_типаСИЗ" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateСотрудник">
+            <Parameter Name="id_Сотрудника" Mode="In" Type="Int32" />
+            <Parameter Name="Фамилия" Mode="In" Type="String" />
+            <Parameter Name="Имя" Mode="In" Type="String" />
+            <Parameter Name="Отчество" Mode="In" Type="String" />
+            <Parameter Name="id_профессии" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateТипСИЗ">
+            <Parameter Name="id_Типа" Mode="In" Type="Int32" />
+            <Parameter Name="Наименование" Mode="In" Type="String" />
+            <Parameter Name="Описание" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="sp_ОбновитьПользователя">
+            <Parameter Name="id_Пользователя" Mode="In" Type="Int32" />
+            <Parameter Name="Логин" Mode="In" Type="String" />
+            <Parameter Name="Пароль" Mode="In" Type="String" />
+            <Parameter Name="id_роли" Mode="In" Type="Int32" />
+            <Parameter Name="Фамилия_сотрудника" Mode="In" Type="String" />
+            <Parameter Name="Имя_сотрудника" Mode="In" Type="String" />
+            <Parameter Name="Отчество_сотрудника" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="sp_GetВыдача_Result">
+          <Property Type="Int32" Name="id_Выдачи" Nullable="false" />
+          <Property Type="Int32" Name="id_сотрудника" Nullable="false" />
+          <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="201" />
+          <Property Type="Int32" Name="id_сиз" Nullable="false" />
+          <Property Type="String" Name="SIZName" Nullable="false" MaxLength="200" />
+          <Property Type="DateTime" Name="Дата_выдачи" Nullable="false" />
+          <Property Type="Int32" Name="количество" Nullable="false" />
+          <Property Type="DateTime" Name="Срок_износа" Nullable="true" />
+          <Property Type="Int32" Name="Кем_создана" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetДерматологическоеСредство_Result">
+          <Property Type="Int32" Name="id_ДерматологическогоСредства" Nullable="false" />
+          <Property Type="String" Name="Наименование" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Норма" Nullable="false" MaxLength="70" />
+          <Property Type="Int32" Name="id_профессии" Nullable="false" />
+          <Property Type="String" Name="ProfessionName" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="sp_GetИнфраструктура_Result">
+          <Property Type="Int32" Name="id_Инфраструктуры" Nullable="false" />
+          <Property Type="String" Name="Наименование" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Описание" Nullable="true" MaxLength="3000" />
+        </ComplexType>
+        <ComplexType Name="sp_GetНормаВыдачи_Result">
+          <Property Type="Int32" Name="id_Нормы" Nullable="false" />
+          <Property Type="Int32" Name="id_профессии" Nullable="false" />
+          <Property Type="String" Name="ProfessionName" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="id_сиз" Nullable="false" />
+          <Property Type="String" Name="SIZName" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Норма_в_единицах_измерения" Nullable="false" MaxLength="80" />
+          <Property Type="String" Name="Период" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="id_Сезона" Nullable="false" />
+          <Property Type="String" Name="SeasonName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Основание_назначения" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="sp_GetПрофессия_Result">
+          <Property Type="Int32" Name="id_Профессии_или_должности" Nullable="false" />
+          <Property Type="String" Name="Наименование" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Код_по_нормативу" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="id_инфраструктуры_или_отдела" Nullable="false" />
+          <Property Type="String" Name="InfrastructureName" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_GetСезон_Result">
+          <Property Type="Int32" Name="id_Сезона" Nullable="false" />
+          <Property Type="String" Name="Наименование" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_GetСИЗ_Result">
+          <Property Type="Int32" Name="id_СИЗ" Nullable="false" />
+          <Property Type="String" Name="Наименование" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Единица_измерения" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="id_типаСИЗ" Nullable="false" />
+          <Property Type="String" Name="TypeName" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_GetСотрудник_Result">
+          <Property Type="Int32" Name="id_Сотрудника" Nullable="false" />
+          <Property Type="String" Name="Фамилия" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Имя" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Отчество" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="id_профессии" Nullable="false" />
+          <Property Type="String" Name="ProfessionName" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="sp_GetТипСИЗ_Result">
+          <Property Type="Int32" Name="id_Типа" Nullable="false" />
+          <Property Type="String" Name="Наименование" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Описание" Nullable="true" MaxLength="3000" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -754,6 +1206,158 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_ДобавитьВыдачу" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_ДобавитьВыдачу" />
+          <FunctionImportMapping FunctionImportName="sp_ДобавитьПользователя" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_ДобавитьПользователя" />
+          <FunctionImportMapping FunctionImportName="sp_AddДерматологическоеСредство" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_AddДерматологическоеСредство" />
+          <FunctionImportMapping FunctionImportName="sp_AddИнфраструктура" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_AddИнфраструктура" />
+          <FunctionImportMapping FunctionImportName="sp_AddНормаВыдачи" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_AddНормаВыдачи" />
+          <FunctionImportMapping FunctionImportName="sp_AddПрофессия" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_AddПрофессия" />
+          <FunctionImportMapping FunctionImportName="sp_AddСезон" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_AddСезон" />
+          <FunctionImportMapping FunctionImportName="sp_AddСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_AddСИЗ" />
+          <FunctionImportMapping FunctionImportName="sp_AddСотрудник" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_AddСотрудник" />
+          <FunctionImportMapping FunctionImportName="sp_AddТипСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_AddТипСИЗ" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteВыдача" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteВыдача" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteДерматологическоеСредство" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteДерматологическоеСредство" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteИнфраструктура" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteИнфраструктура" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteНормаВыдачи" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteНормаВыдачи" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteПрофессия" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteПрофессия" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteСезон" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteСезон" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteСИЗ" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteСотрудник" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteСотрудник" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteТипСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteТипСИЗ" />
+          <FunctionImportMapping FunctionImportName="sp_GetВыдача" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetВыдача">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetВыдача_Result">
+                <ScalarProperty Name="id_Выдачи" ColumnName="id_Выдачи" />
+                <ScalarProperty Name="id_сотрудника" ColumnName="id_сотрудника" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="id_сиз" ColumnName="id_сиз" />
+                <ScalarProperty Name="SIZName" ColumnName="SIZName" />
+                <ScalarProperty Name="Дата_выдачи" ColumnName="Дата_выдачи" />
+                <ScalarProperty Name="количество" ColumnName="количество" />
+                <ScalarProperty Name="Срок_износа" ColumnName="Срок_износа" />
+                <ScalarProperty Name="Кем_создана" ColumnName="Кем_создана" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetДерматологическоеСредство" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetДерматологическоеСредство">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetДерматологическоеСредство_Result">
+                <ScalarProperty Name="id_ДерматологическогоСредства" ColumnName="id_ДерматологическогоСредства" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Норма" ColumnName="Норма" />
+                <ScalarProperty Name="id_профессии" ColumnName="id_профессии" />
+                <ScalarProperty Name="ProfessionName" ColumnName="ProfessionName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetИнфраструктура" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetИнфраструктура">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetИнфраструктура_Result">
+                <ScalarProperty Name="id_Инфраструктуры" ColumnName="id_Инфраструктуры" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetНормаВыдачи" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetНормаВыдачи">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetНормаВыдачи_Result">
+                <ScalarProperty Name="id_Нормы" ColumnName="id_Нормы" />
+                <ScalarProperty Name="id_профессии" ColumnName="id_профессии" />
+                <ScalarProperty Name="ProfessionName" ColumnName="ProfessionName" />
+                <ScalarProperty Name="id_сиз" ColumnName="id_сиз" />
+                <ScalarProperty Name="SIZName" ColumnName="SIZName" />
+                <ScalarProperty Name="Норма_в_единицах_измерения" ColumnName="Норма_в_единицах_измерения" />
+                <ScalarProperty Name="Период" ColumnName="Период" />
+                <ScalarProperty Name="id_Сезона" ColumnName="id_Сезона" />
+                <ScalarProperty Name="SeasonName" ColumnName="SeasonName" />
+                <ScalarProperty Name="Основание_назначения" ColumnName="Основание_назначения" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetПрофессия" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetПрофессия">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetПрофессия_Result">
+                <ScalarProperty Name="id_Профессии_или_должности" ColumnName="id_Профессии_или_должности" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Код_по_нормативу" ColumnName="Код_по_нормативу" />
+                <ScalarProperty Name="id_инфраструктуры_или_отдела" ColumnName="id_инфраструктуры_или_отдела" />
+                <ScalarProperty Name="InfrastructureName" ColumnName="InfrastructureName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetСезон" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСезон">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСезон_Result">
+                <ScalarProperty Name="id_Сезона" ColumnName="id_Сезона" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСИЗ">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСИЗ_Result">
+                <ScalarProperty Name="id_СИЗ" ColumnName="id_СИЗ" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Единица_измерения" ColumnName="Единица_измерения" />
+                <ScalarProperty Name="id_типаСИЗ" ColumnName="id_типаСИЗ" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetСотрудник" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСотрудник">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСотрудник_Result">
+                <ScalarProperty Name="id_Сотрудника" ColumnName="id_Сотрудника" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="id_профессии" ColumnName="id_профессии" />
+                <ScalarProperty Name="ProfessionName" ColumnName="ProfessionName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetТипСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetТипСИЗ">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetТипСИЗ_Result">
+                <ScalarProperty Name="id_Типа" ColumnName="id_Типа" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateВыдача" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateВыдача" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateДерматологическоеСредство" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateДерматологическоеСредство" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateИнфраструктура" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateИнфраструктура" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateНормаВыдачи" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateНормаВыдачи" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateПрофессия" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateПрофессия" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateСезон" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateСезон" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateСИЗ" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateСотрудник" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateСотрудник" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateТипСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateТипСИЗ" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_ОбновитьПользователя" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_ОбновитьПользователя" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -1,0 +1,40 @@
+﻿<Window x:Class="УчетСИЗ.ViewModels.AddEditNormaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:УчетСИЗ.ViewModels"
+        mc:Ignorable="d"
+        Title="Норма выдачи" Height="400" Width="400" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Профессия:"/>
+        <ComboBox x:Name="ProfessionComboBox" Grid.Row="1" Margin="0,0,0,10"/>
+        <Label Content="СИЗ:" Grid.Row="2"/>
+        <ComboBox x:Name="SIZComboBox" Grid.Row="3" Margin="0,0,0,10"/>
+        <Label Content="Норма в ед. измерения:" Grid.Row="4"/>
+        <TextBox x:Name="NormTextBox" Grid.Row="5" Margin="0,0,0,10"/>
+        <Label Content="Период:" Grid.Row="6"/>
+        <TextBox x:Name="PeriodTextBox" Grid.Row="7" Margin="0,0,0,10"/>
+        <Label Content="Сезон:" Grid.Row="8"/>
+        <ComboBox x:Name="SeasonComboBox" Grid.Row="9" Margin="0,0,0,10"/>
+        <Label Content="Основание назначения:" Grid.Row="10"/>
+        <TextBox x:Name="BasisTextBox" Grid.Row="11" Margin="0,0,0,10"/>
+        <StackPanel Grid.Row="12" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Content="Сохранить" Width="100" Margin="0,0,10,0" Click="Save_Click"/>
+            <Button Content="Отмена" Width="100" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

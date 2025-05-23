@@ -43,6 +43,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -80,10 +81,72 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelBelkaFavoriteSIZ.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataBaseHelper.cs" />
+    <Compile Include="Models\ManagerModels.cs" />
     <Compile Include="Models\ThisUser.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="sp_GetВыдача_Result.cs">
+      <DependentUpon>ModelBelkaFavoriteSIZ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetДерматологическоеСредство_Result.cs">
+      <DependentUpon>ModelBelkaFavoriteSIZ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetИнфраструктура_Result.cs">
+      <DependentUpon>ModelBelkaFavoriteSIZ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetНормаВыдачи_Result.cs">
+      <DependentUpon>ModelBelkaFavoriteSIZ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetПрофессия_Result.cs">
+      <DependentUpon>ModelBelkaFavoriteSIZ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetСезон_Result.cs">
+      <DependentUpon>ModelBelkaFavoriteSIZ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetСИЗ_Result.cs">
+      <DependentUpon>ModelBelkaFavoriteSIZ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetСотрудник_Result.cs">
+      <DependentUpon>ModelBelkaFavoriteSIZ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetТипСИЗ_Result.cs">
+      <DependentUpon>ModelBelkaFavoriteSIZ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>ModelBelkaFavoriteSIZ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>ModelBelkaFavoriteSIZ.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AccountantWindow.xaml.cs">
       <DependentUpon>AccountantWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AddEditDermatologWindow.xaml.cs">
+      <DependentUpon>AddEditDermatologWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AddEditEmployeeWindow.xaml.cs">
+      <DependentUpon>AddEditEmployeeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AddEditInfraWindow.xaml.cs">
+      <DependentUpon>AddEditInfraWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AddEditNormaWindow.xaml.cs">
+      <DependentUpon>AddEditNormaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AddEditProfWindow.xaml.cs">
+      <DependentUpon>AddEditProfWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AddEditSeasonWindow.xaml.cs">
+      <DependentUpon>AddEditSeasonWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AddEditSIZTypeWindow.xaml.cs">
+      <DependentUpon>AddEditSIZTypeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AddEditSIZWindow.xaml.cs">
+      <DependentUpon>AddEditSIZWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AddEditVydachaWindow.xaml.cs">
+      <DependentUpon>AddEditVydachaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AddUserWindow.xaml.cs">
       <DependentUpon>AddUserWindow.xaml</DependentUpon>
@@ -93,6 +156,9 @@
     </Compile>
     <Compile Include="ViewModels\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ManagerWindow.xaml.cs">
+      <DependentUpon>ManagerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Выдача.cs">
       <DependentUpon>ModelBelkaFavoriteSIZ.tt</DependentUpon>
@@ -143,6 +209,42 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ViewModels\AddEditDermatologWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModels\AddEditEmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModels\AddEditInfraWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModels\AddEditNormaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModels\AddEditProfWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModels\AddEditSeasonWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModels\AddEditSIZTypeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModels\AddEditSIZWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModels\AddEditVydachaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewModels\AddUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -152,6 +254,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewModels\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModels\ManagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -194,6 +300,7 @@
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Icon.jpg" />
     <Content Include="ModelBelkaFavoriteSIZ.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelBelkaFavoriteSIZ.Context.cs</LastGenOutput>

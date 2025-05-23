@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ namespace УчетСИЗ
         private БелкаФаворитСпичечнаяФабрикаБазаДанныхEntities db;
         private List<User> users;
         private User selectedUser;
-
+        User _user = new User();
         public MainWindow()
         {
             InitializeComponent();
@@ -35,42 +36,20 @@ namespace УчетСИЗ
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             db = new БелкаФаворитСпичечнаяФабрикаБазаДанныхEntities();
-            LoadUsers();
+            _user.LoadUsers(UsersGrid);
         }
 
-        private void LoadUsers(string filter = "")
-        {
-            var query = db.Пользователи.AsQueryable();
 
-            if (!string.IsNullOrEmpty(filter))
-            {
-                query = query.Where(u =>u.Фамилия_сотрудника.Contains(filter) ||u.Имя_сотрудника.Contains(filter) || u.Отчество_сотрудника.Contains(filter) || u.Логин.Contains(filter));
-            }
-
-            users = query.Select(u => new User
-            {
-                Id = u.id_Пользователя,
-                Login = u.Логин,
-                Password = u.Пароль,
-                Surname = u.Фамилия_сотрудника,
-                Firstname = u.Имя_сотрудника,
-                Lastname = u.Отчество_сотрудника,
-                Rolename = u.Роль.Наименование,
-                Role = u.id_роли,
-                LastLoginDate = u.Дата_последнего_входа}).ToList();
-
-            UsersGrid.ItemsSource = users;
-        }
 
         private void FilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            LoadUsers(FilterTextBox.Text);
+            _user.LoadUsers(UsersGrid, FilterTextBox.Text);
         }
 
         private void ResetFilter_Click(object sender, RoutedEventArgs e)
         {
             FilterTextBox.Text = "";
-            LoadUsers();
+            _user.LoadUsers(UsersGrid);
         }
 
         private void UsersGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -82,11 +61,17 @@ namespace УчетСИЗ
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
-            AddUserWindow addUserWindow = new AddUserWindow();
-            addUserWindow.ShowDialog();
-            if(addUserWindow.ShowDialog() == true)
+            try
             {
-                LoadUsers();
+                AddUserWindow addUserWindow = new AddUserWindow();
+                if (addUserWindow.ShowDialog() == true) 
+                {
+                    _user.LoadUsers(UsersGrid);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Произошла ошибка\n" + ex, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -110,7 +95,7 @@ namespace УчетСИЗ
                     dbUser.id_роли = updatedUser.Role;
 
                     db.SaveChanges();
-                    LoadUsers();
+                    _user.LoadUsers(UsersGrid);
                 }
             }
         }
@@ -132,9 +117,18 @@ namespace УчетСИЗ
                 {
                     db.Пользователи.Remove(dbUser);
                     db.SaveChanges();
-                    LoadUsers();
+                    _user.LoadUsers(UsersGrid);
                 }
             }
+        }
+
+        private void OutButton_Click(object sender, RoutedEventArgs e)
+        {
+            ThisUsers thisUsers = new ThisUsers();
+            thisUsers.ClearDat();
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
         }
     }
 }
