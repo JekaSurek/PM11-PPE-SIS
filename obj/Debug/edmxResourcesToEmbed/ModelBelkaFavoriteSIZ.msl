@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModelContainer" CdmEntityContainer="БелкаФаворитСпичечнаяФабрикаБазаДанныхEntities">
+    <EntitySetMapping Name="Выдача">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Выдача">
+        <MappingFragment StoreEntitySet="Выдача">
+          <ScalarProperty Name="id_Выдачи" ColumnName="id_Выдачи" />
+          <ScalarProperty Name="id_сотрудника" ColumnName="id_сотрудника" />
+          <ScalarProperty Name="id_сиз" ColumnName="id_сиз" />
+          <ScalarProperty Name="Дата_выдачи" ColumnName="Дата_выдачи" />
+          <ScalarProperty Name="количество" ColumnName="количество" />
+          <ScalarProperty Name="Срок_износа" ColumnName="Срок_износа" />
+          <ScalarProperty Name="Дата_создания" ColumnName="Дата_создания" />
+          <ScalarProperty Name="Дата_изменения" ColumnName="Дата_изменения" />
+          <ScalarProperty Name="Кем_создана" ColumnName="Кем_создана" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ДерматологическоеСредство">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.ДерматологическоеСредство">
+        <MappingFragment StoreEntitySet="ДерматологическоеСредство">
+          <ScalarProperty Name="id_ДерматологическогоСредства" ColumnName="id_ДерматологическогоСредства" />
+          <ScalarProperty Name="id_профессии" ColumnName="id_профессии" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Норма" ColumnName="Норма" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Инфраструктура">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Инфраструктура">
+        <MappingFragment StoreEntitySet="Инфраструктура">
+          <ScalarProperty Name="id_Инфраструктуры" ColumnName="id_Инфраструктуры" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="НормаВыдачи">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.НормаВыдачи">
+        <MappingFragment StoreEntitySet="НормаВыдачи">
+          <ScalarProperty Name="id_Нормы" ColumnName="id_Нормы" />
+          <ScalarProperty Name="id_профессии" ColumnName="id_профессии" />
+          <ScalarProperty Name="id_сиз" ColumnName="id_сиз" />
+          <ScalarProperty Name="Норма_в_единицах_измерения" ColumnName="Норма_в_единицах_измерения" />
+          <ScalarProperty Name="Период" ColumnName="Период" />
+          <ScalarProperty Name="Сезон" ColumnName="Сезон" />
+          <ScalarProperty Name="Основание_назначения" ColumnName="Основание_назначения" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Пользователи">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Пользователи">
+        <MappingFragment StoreEntitySet="Пользователи">
+          <ScalarProperty Name="id_Пользователя" ColumnName="id_Пользователя" />
+          <ScalarProperty Name="Логин" ColumnName="Логин" />
+          <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+          <ScalarProperty Name="id_роли" ColumnName="id_роли" />
+          <ScalarProperty Name="Фамилия_сотрудника" ColumnName="Фамилия_сотрудника" />
+          <ScalarProperty Name="Имя_сотрудника" ColumnName="Имя_сотрудника" />
+          <ScalarProperty Name="Отчество_сотрудника" ColumnName="Отчество_сотрудника" />
+          <ScalarProperty Name="Дата_создания" ColumnName="Дата_создания" />
+          <ScalarProperty Name="Дата_изменения" ColumnName="Дата_изменения" />
+          <ScalarProperty Name="Дата_последнего_входа" ColumnName="Дата_последнего_входа" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Профессия">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Профессия">
+        <MappingFragment StoreEntitySet="Профессия">
+          <ScalarProperty Name="id_Профессии_или_должности" ColumnName="id_Профессии_или_должности" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Код_по_нормативу" ColumnName="Код_по_нормативу" />
+          <ScalarProperty Name="id_инфраструктуры_или_отдела" ColumnName="id_инфраструктуры_или_отдела" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Роль">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Роль">
+        <MappingFragment StoreEntitySet="Роль">
+          <ScalarProperty Name="id_Роли" ColumnName="id_Роли" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Сезон">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Сезон">
+        <MappingFragment StoreEntitySet="Сезон">
+          <ScalarProperty Name="id_Сезона" ColumnName="id_Сезона" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="СИЗ">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.СИЗ">
+        <MappingFragment StoreEntitySet="СИЗ">
+          <ScalarProperty Name="id_СИЗ" ColumnName="id_СИЗ" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="id_типаСИЗ" ColumnName="id_типаСИЗ" />
+          <ScalarProperty Name="Единица_измерения" ColumnName="Единица_измерения" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Сотрудник">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Сотрудник">
+        <MappingFragment StoreEntitySet="Сотрудник">
+          <ScalarProperty Name="id_Сотрудника" ColumnName="id_Сотрудника" />
+          <ScalarProperty Name="id_профессии" ColumnName="id_профессии" />
+          <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+          <ScalarProperty Name="Имя" ColumnName="Имя" />
+          <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ТипСИЗ">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.ТипСИЗ">
+        <MappingFragment StoreEntitySet="ТипСИЗ">
+          <ScalarProperty Name="id_Типа" ColumnName="id_Типа" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

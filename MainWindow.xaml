@@ -1,0 +1,42 @@
+﻿<Window x:Class="УчетСИЗ.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:УчетСИЗ"
+        mc:Ignorable="d"
+        Title="Управление пользователями" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10">
+            <TextBox x:Name="FilterTextBox" Width="200" Margin="0 0 10 0"
+                     TextChanged="FilterTextBox_TextChanged"/>
+            <Button Content="Сбросить фильтр" Click="ResetFilter_Click"/>
+        </StackPanel>
+
+        <DataGrid x:Name="UsersGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" SelectionChanged="UsersGrid_SelectionChanged" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                <DataGridTextColumn Header="Логин" Binding="{Binding Login}"/>
+                <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}"/>
+                <DataGridTextColumn Header="Роль" Binding="{Binding Rolename}"/>
+                <DataGridTextColumn Header="Последний вход" Binding="{Binding LastLoginDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"/>
+                <DataGridTextColumn Header="Дата создания" Binding="{Binding LastLoginDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"/>
+                <DataGridTextColumn Header="Дата изменения" Binding="{Binding LastLoginDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
+            <Button Content="Добавить" Width="100" Margin="0 0 10 0" Click="AddUser_Click"/>
+            <Button Content="Редактировать" Width="100" Margin="0 0 10 0" 
+                    Click="EditUser_Click" x:Name="EditButton" IsEnabled="False"/>
+            <Button Content="Удалить" Width="100" Click="DeleteUser_Click" 
+                    x:Name="DeleteButton" IsEnabled="False"/>
+        </StackPanel>
+    </Grid>
+</Window>
