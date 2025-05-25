@@ -1,0 +1,518 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Выдача">
+    <Key>
+      <PropertyRef Name="id_Выдачи" />
+    </Key>
+    <Property Name="id_Выдачи" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_сотрудника" Type="int" Nullable="false" />
+    <Property Name="id_сиз" Type="int" Nullable="false" />
+    <Property Name="Дата_выдачи" Type="date" Nullable="false" />
+    <Property Name="количество" Type="int" Nullable="false" />
+    <Property Name="Срок_износа" Type="date" />
+    <Property Name="Дата_создания" Type="datetime" Nullable="false" />
+    <Property Name="Дата_изменения" Type="datetime" Nullable="false" />
+    <Property Name="Кем_создана" Type="int" />
+  </EntityType>
+  <EntityType Name="ДерматологическоеСредство">
+    <Key>
+      <PropertyRef Name="id_ДерматологическогоСредства" />
+    </Key>
+    <Property Name="id_ДерматологическогоСредства" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_профессии" Type="int" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Норма" Type="nvarchar" MaxLength="70" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Инфраструктура">
+    <Key>
+      <PropertyRef Name="id_Инфраструктуры" />
+    </Key>
+    <Property Name="id_Инфраструктуры" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Описание" Type="nvarchar" MaxLength="3000" />
+  </EntityType>
+  <EntityType Name="ИсторияВхода">
+    <Key>
+      <PropertyRef Name="id_Записи" />
+    </Key>
+    <Property Name="id_Записи" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_пользователя" Type="int" />
+    <Property Name="Время_входа_в_систему" Type="datetime" Nullable="false" />
+    <Property Name="Система" Type="nvarchar(max)" />
+    <Property Name="IP_adress" Type="nvarchar" MaxLength="45" Nullable="false" />
+    <Property Name="Успех" Type="bit" Nullable="false" />
+    <Property Name="Причина_отказа" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="НормаВыдачи">
+    <Key>
+      <PropertyRef Name="id_Нормы" />
+    </Key>
+    <Property Name="id_Нормы" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_профессии" Type="int" Nullable="false" />
+    <Property Name="id_сиз" Type="int" Nullable="false" />
+    <Property Name="Норма_в_единицах_измерения" Type="varchar" MaxLength="80" Nullable="false" />
+    <Property Name="Период" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Сезон" Type="int" Nullable="false" />
+    <Property Name="Основание_назначения" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Пользователи">
+    <Key>
+      <PropertyRef Name="id_Пользователя" />
+    </Key>
+    <Property Name="id_Пользователя" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Логин" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="Пароль" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="id_роли" Type="int" Nullable="false" />
+    <Property Name="Фамилия_сотрудника" Type="nvarchar" MaxLength="100" />
+    <Property Name="Имя_сотрудника" Type="nvarchar" MaxLength="100" />
+    <Property Name="Отчество_сотрудника" Type="nvarchar" MaxLength="100" />
+    <Property Name="Дата_создания" Type="datetime" />
+    <Property Name="Дата_изменения" Type="datetime" />
+    <Property Name="Дата_последнего_входа" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Профессия">
+    <Key>
+      <PropertyRef Name="id_Профессии_или_должности" />
+    </Key>
+    <Property Name="id_Профессии_или_должности" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Код_по_нормативу" Type="nvarchar" MaxLength="100" />
+    <Property Name="id_инфраструктуры_или_отдела" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Роль">
+    <Key>
+      <PropertyRef Name="id_Роли" />
+    </Key>
+    <Property Name="id_Роли" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Описание" Type="nvarchar" MaxLength="3000" />
+  </EntityType>
+  <EntityType Name="Сезон">
+    <Key>
+      <PropertyRef Name="id_Сезона" />
+    </Key>
+    <Property Name="id_Сезона" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="СИЗ">
+    <Key>
+      <PropertyRef Name="id_СИЗ" />
+    </Key>
+    <Property Name="id_СИЗ" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="id_типаСИЗ" Type="int" Nullable="false" />
+    <Property Name="Единица_измерения" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Сотрудник">
+    <Key>
+      <PropertyRef Name="id_Сотрудника" />
+    </Key>
+    <Property Name="id_Сотрудника" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_профессии" Type="int" Nullable="false" />
+    <Property Name="Фамилия" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Имя" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Отчество" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ТипСИЗ">
+    <Key>
+      <PropertyRef Name="id_Типа" />
+    </Key>
+    <Property Name="id_Типа" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Описание" Type="nvarchar" MaxLength="3000" />
+  </EntityType>
+  <Association Name="FK_Выдача_Пользователи">
+    <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
+    <End Role="Выдача" Type="Self.Выдача" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Пользователи">
+        <PropertyRef Name="id_Пользователя" />
+      </Principal>
+      <Dependent Role="Выдача">
+        <PropertyRef Name="Кем_создана" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Выдача_СИЗ">
+    <End Role="СИЗ" Type="Self.СИЗ" Multiplicity="1" />
+    <End Role="Выдача" Type="Self.Выдача" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="СИЗ">
+        <PropertyRef Name="id_СИЗ" />
+      </Principal>
+      <Dependent Role="Выдача">
+        <PropertyRef Name="id_сиз" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Выдача_Сотрудник">
+    <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="1" />
+    <End Role="Выдача" Type="Self.Выдача" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Сотрудник">
+        <PropertyRef Name="id_Сотрудника" />
+      </Principal>
+      <Dependent Role="Выдача">
+        <PropertyRef Name="id_сотрудника" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ДерматологическоеСредство_Профессия">
+    <End Role="Профессия" Type="Self.Профессия" Multiplicity="1" />
+    <End Role="ДерматологическоеСредство" Type="Self.ДерматологическоеСредство" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Профессия">
+        <PropertyRef Name="id_Профессии_или_должности" />
+      </Principal>
+      <Dependent Role="ДерматологическоеСредство">
+        <PropertyRef Name="id_профессии" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ИсторияВхода_Пользователи">
+    <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
+    <End Role="ИсторияВхода" Type="Self.ИсторияВхода" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Пользователи">
+        <PropertyRef Name="id_Пользователя" />
+      </Principal>
+      <Dependent Role="ИсторияВхода">
+        <PropertyRef Name="id_пользователя" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_НормаВыдачи_Профессия">
+    <End Role="Профессия" Type="Self.Профессия" Multiplicity="1" />
+    <End Role="НормаВыдачи" Type="Self.НормаВыдачи" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Профессия">
+        <PropertyRef Name="id_Профессии_или_должности" />
+      </Principal>
+      <Dependent Role="НормаВыдачи">
+        <PropertyRef Name="id_профессии" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_НормаВыдачи_Сезон">
+    <End Role="Сезон" Type="Self.Сезон" Multiplicity="1" />
+    <End Role="НормаВыдачи" Type="Self.НормаВыдачи" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Сезон">
+        <PropertyRef Name="id_Сезона" />
+      </Principal>
+      <Dependent Role="НормаВыдачи">
+        <PropertyRef Name="Сезон" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_НормаВыдачи_СИЗ">
+    <End Role="СИЗ" Type="Self.СИЗ" Multiplicity="1" />
+    <End Role="НормаВыдачи" Type="Self.НормаВыдачи" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="СИЗ">
+        <PropertyRef Name="id_СИЗ" />
+      </Principal>
+      <Dependent Role="НормаВыдачи">
+        <PropertyRef Name="id_сиз" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Пользователи_Роль">
+    <End Role="Роль" Type="Self.Роль" Multiplicity="1" />
+    <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Роль">
+        <PropertyRef Name="id_Роли" />
+      </Principal>
+      <Dependent Role="Пользователи">
+        <PropertyRef Name="id_роли" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Профессия_Инфраструктура">
+    <End Role="Инфраструктура" Type="Self.Инфраструктура" Multiplicity="1" />
+    <End Role="Профессия" Type="Self.Профессия" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Инфраструктура">
+        <PropertyRef Name="id_Инфраструктуры" />
+      </Principal>
+      <Dependent Role="Профессия">
+        <PropertyRef Name="id_инфраструктуры_или_отдела" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_СИЗ_ТипСИЗ">
+    <End Role="ТипСИЗ" Type="Self.ТипСИЗ" Multiplicity="1" />
+    <End Role="СИЗ" Type="Self.СИЗ" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ТипСИЗ">
+        <PropertyRef Name="id_Типа" />
+      </Principal>
+      <Dependent Role="СИЗ">
+        <PropertyRef Name="id_типаСИЗ" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Сотрудник_Профессия">
+    <End Role="Профессия" Type="Self.Профессия" Multiplicity="1" />
+    <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Профессия">
+        <PropertyRef Name="id_Профессии_или_должности" />
+      </Principal>
+      <Dependent Role="Сотрудник">
+        <PropertyRef Name="id_профессии" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_AddДерматологическоеСредство" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+    <Parameter Name="Норма" Type="nvarchar" Mode="In" />
+    <Parameter Name="id_профессии" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_AddИнфраструктура" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+    <Parameter Name="Описание" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_AddНормаВыдачи" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_профессии" Type="int" Mode="In" />
+    <Parameter Name="id_сиз" Type="int" Mode="In" />
+    <Parameter Name="Норма_в_единицах_измерения" Type="varchar" Mode="In" />
+    <Parameter Name="Период" Type="varchar" Mode="In" />
+    <Parameter Name="Сезон" Type="int" Mode="In" />
+    <Parameter Name="Основание_назначения" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_AddПрофессия" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+    <Parameter Name="Код_по_нормативу" Type="nvarchar" Mode="In" />
+    <Parameter Name="id_инфраструктуры_или_отдела" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_AddСезон" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_AddСИЗ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+    <Parameter Name="Единица_измерения" Type="nvarchar" Mode="In" />
+    <Parameter Name="id_типаСИЗ" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_AddСотрудник" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Фамилия" Type="nvarchar" Mode="In" />
+    <Parameter Name="Имя" Type="nvarchar" Mode="In" />
+    <Parameter Name="Отчество" Type="nvarchar" Mode="In" />
+    <Parameter Name="id_профессии" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_AddТипСИЗ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+    <Parameter Name="Описание" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteВыдача" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_Выдачи" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteДерматологическоеСредство" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_ДерматологическогоСредства" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteИнфраструктура" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_Инфраструктуры" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteНормаВыдачи" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_Нормы" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteПрофессия" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_Профессии_или_должности" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteСезон" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_Сезона" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteСИЗ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_СИЗ" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteСотрудник" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_Сотрудника" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteТипСИЗ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_Типа" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetВыдача" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="filter" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetДерматологическоеСредство" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="filter" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetИнфраструктура" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="filter" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetНормаВыдачи" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="filter" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetПрофессия" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="filter" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetСезон" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="filter" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetСИЗ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="filter" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetСотрудник" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="filter" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetТипСИЗ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="filter" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateВыдача" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_Выдачи" Type="int" Mode="In" />
+    <Parameter Name="id_сотрудника" Type="int" Mode="In" />
+    <Parameter Name="id_сиз" Type="int" Mode="In" />
+    <Parameter Name="количество" Type="int" Mode="In" />
+    <Parameter Name="Срок_износа" Type="date" Mode="In" />
+    <Parameter Name="Кем_создана" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateДерматологическоеСредство" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_ДерматологическогоСредства" Type="int" Mode="In" />
+    <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+    <Parameter Name="Норма" Type="nvarchar" Mode="In" />
+    <Parameter Name="id_профессии" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateИнфраструктура" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_Инфраструктуры" Type="int" Mode="In" />
+    <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+    <Parameter Name="Описание" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateНормаВыдачи" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_Нормы" Type="int" Mode="In" />
+    <Parameter Name="id_профессии" Type="int" Mode="In" />
+    <Parameter Name="id_сиз" Type="int" Mode="In" />
+    <Parameter Name="Норма_в_единицах_измерения" Type="varchar" Mode="In" />
+    <Parameter Name="Период" Type="varchar" Mode="In" />
+    <Parameter Name="Сезон" Type="int" Mode="In" />
+    <Parameter Name="Основание_назначения" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateПрофессия" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_Профессии_или_должности" Type="int" Mode="In" />
+    <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+    <Parameter Name="Код_по_нормативу" Type="nvarchar" Mode="In" />
+    <Parameter Name="id_инфраструктуры_или_отдела" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateСезон" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_Сезона" Type="int" Mode="In" />
+    <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateСИЗ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_СИЗ" Type="int" Mode="In" />
+    <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+    <Parameter Name="Единица_измерения" Type="nvarchar" Mode="In" />
+    <Parameter Name="id_типаСИЗ" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateСотрудник" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_Сотрудника" Type="int" Mode="In" />
+    <Parameter Name="Фамилия" Type="nvarchar" Mode="In" />
+    <Parameter Name="Имя" Type="nvarchar" Mode="In" />
+    <Parameter Name="Отчество" Type="nvarchar" Mode="In" />
+    <Parameter Name="id_профессии" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateТипСИЗ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_Типа" Type="int" Mode="In" />
+    <Parameter Name="Наименование" Type="nvarchar" Mode="In" />
+    <Parameter Name="Описание" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_ДобавитьВыдачу" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_сотрудника" Type="int" Mode="In" />
+    <Parameter Name="id_сиз" Type="int" Mode="In" />
+    <Parameter Name="количество" Type="int" Mode="In" />
+    <Parameter Name="Срок_износа" Type="date" Mode="In" />
+    <Parameter Name="Кем_создана" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_ДобавитьПользователя" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Логин" Type="nvarchar" Mode="In" />
+    <Parameter Name="Пароль" Type="nvarchar" Mode="In" />
+    <Parameter Name="id_роли" Type="int" Mode="In" />
+    <Parameter Name="Фамилия_сотрудника" Type="nvarchar" Mode="In" />
+    <Parameter Name="Имя_сотрудника" Type="nvarchar" Mode="In" />
+    <Parameter Name="Отчество_сотрудника" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_ОбновитьПользователя" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_Пользователя" Type="int" Mode="In" />
+    <Parameter Name="Логин" Type="nvarchar" Mode="In" />
+    <Parameter Name="Пароль" Type="nvarchar" Mode="In" />
+    <Parameter Name="id_роли" Type="int" Mode="In" />
+    <Parameter Name="Фамилия_сотрудника" Type="nvarchar" Mode="In" />
+    <Parameter Name="Имя_сотрудника" Type="nvarchar" Mode="In" />
+    <Parameter Name="Отчество_сотрудника" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModelContainer">
+    <EntitySet Name="Выдача" EntityType="Self.Выдача" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ДерматологическоеСредство" EntityType="Self.ДерматологическоеСредство" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Инфраструктура" EntityType="Self.Инфраструктура" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ИсторияВхода" EntityType="Self.ИсторияВхода" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="НормаВыдачи" EntityType="Self.НормаВыдачи" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Пользователи" EntityType="Self.Пользователи" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Профессия" EntityType="Self.Профессия" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Роль" EntityType="Self.Роль" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Сезон" EntityType="Self.Сезон" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="СИЗ" EntityType="Self.СИЗ" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Сотрудник" EntityType="Self.Сотрудник" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ТипСИЗ" EntityType="Self.ТипСИЗ" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Выдача_Пользователи" Association="Self.FK_Выдача_Пользователи">
+      <End Role="Пользователи" EntitySet="Пользователи" />
+      <End Role="Выдача" EntitySet="Выдача" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Выдача_СИЗ" Association="Self.FK_Выдача_СИЗ">
+      <End Role="СИЗ" EntitySet="СИЗ" />
+      <End Role="Выдача" EntitySet="Выдача" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Выдача_Сотрудник" Association="Self.FK_Выдача_Сотрудник">
+      <End Role="Сотрудник" EntitySet="Сотрудник" />
+      <End Role="Выдача" EntitySet="Выдача" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ДерматологическоеСредство_Профессия" Association="Self.FK_ДерматологическоеСредство_Профессия">
+      <End Role="Профессия" EntitySet="Профессия" />
+      <End Role="ДерматологическоеСредство" EntitySet="ДерматологическоеСредство" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ИсторияВхода_Пользователи" Association="Self.FK_ИсторияВхода_Пользователи">
+      <End Role="Пользователи" EntitySet="Пользователи" />
+      <End Role="ИсторияВхода" EntitySet="ИсторияВхода" />
+    </AssociationSet>
+    <AssociationSet Name="FK_НормаВыдачи_Профессия" Association="Self.FK_НормаВыдачи_Профессия">
+      <End Role="Профессия" EntitySet="Профессия" />
+      <End Role="НормаВыдачи" EntitySet="НормаВыдачи" />
+    </AssociationSet>
+    <AssociationSet Name="FK_НормаВыдачи_Сезон" Association="Self.FK_НормаВыдачи_Сезон">
+      <End Role="Сезон" EntitySet="Сезон" />
+      <End Role="НормаВыдачи" EntitySet="НормаВыдачи" />
+    </AssociationSet>
+    <AssociationSet Name="FK_НормаВыдачи_СИЗ" Association="Self.FK_НормаВыдачи_СИЗ">
+      <End Role="СИЗ" EntitySet="СИЗ" />
+      <End Role="НормаВыдачи" EntitySet="НормаВыдачи" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Пользователи_Роль" Association="Self.FK_Пользователи_Роль">
+      <End Role="Роль" EntitySet="Роль" />
+      <End Role="Пользователи" EntitySet="Пользователи" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Профессия_Инфраструктура" Association="Self.FK_Профессия_Инфраструктура">
+      <End Role="Инфраструктура" EntitySet="Инфраструктура" />
+      <End Role="Профессия" EntitySet="Профессия" />
+    </AssociationSet>
+    <AssociationSet Name="FK_СИЗ_ТипСИЗ" Association="Self.FK_СИЗ_ТипСИЗ">
+      <End Role="ТипСИЗ" EntitySet="ТипСИЗ" />
+      <End Role="СИЗ" EntitySet="СИЗ" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Сотрудник_Профессия" Association="Self.FK_Сотрудник_Профессия">
+      <End Role="Профессия" EntitySet="Профессия" />
+      <End Role="Сотрудник" EntitySet="Сотрудник" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

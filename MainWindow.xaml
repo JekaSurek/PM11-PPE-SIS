@@ -6,38 +6,79 @@
         xmlns:local="clr-namespace:УчетСИЗ"
         mc:Ignorable="d"
         Title="Управление пользователями" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <TabControl>
+        <TabItem Header="Управление пользователями">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10">
+                    <TextBox x:Name="FilterTextBox" Width="200" Margin="0 0 10 0" TextChanged="FilterTextBox_TextChanged"/>
+                    <Button Content="Сбросить фильтр" Click="ResetFilter_Click" Margin="0 0 10 0"/>
+                    <Button x:Name="OutButton" Content="Выйти" HorizontalAlignment="Right" Click="OutButton_Click"/>
+                </StackPanel>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10">
-            <TextBox x:Name="FilterTextBox" Width="200" Margin="0 0 10 0" TextChanged="FilterTextBox_TextChanged"/>
-            <Button Content="Сбросить фильтр" Click="ResetFilter_Click" Margin="0 0 10 0"/>
-            <Button x:Name="OutButton" Content="Выйти" HorizontalAlignment="Right" Click="OutButton_Click"/>
-        </StackPanel>
+                <DataGrid x:Name="UsersGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" SelectionChanged="UsersGrid_SelectionChanged" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                        <DataGridTextColumn Header="Логин" Binding="{Binding Login}"/>
+                        <DataGridTextColumn Header="Пароль" Binding="{Binding Password}"/>
+                        <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}"/>
+                        <DataGridTextColumn Header="Роль" Binding="{Binding Rolename}"/>
+                        <DataGridTextColumn Header="Последний вход" Binding="{Binding LastLoginDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"/>
+                        <DataGridTextColumn Header="Дата создания" Binding="{Binding CreatedDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"/>
+                        <DataGridTextColumn Header="Дата изменения" Binding="{Binding UpdateDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
 
-        <DataGrid x:Name="UsersGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" SelectionChanged="UsersGrid_SelectionChanged" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
-                <DataGridTextColumn Header="Логин" Binding="{Binding Login}"/>
-                <DataGridTextColumn Header="Пароль" Binding="{Binding Password}"/>
-                <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}"/>
-                <DataGridTextColumn Header="Роль" Binding="{Binding Rolename}"/>
-                <DataGridTextColumn Header="Последний вход" Binding="{Binding LastLoginDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"/>
-                <DataGridTextColumn Header="Дата создания" Binding="{Binding CreatedDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"/>
-                <DataGridTextColumn Header="Дата изменения" Binding="{Binding UpdateDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
+                    <Button Content="Добавить" Width="100" Margin="0 0 10 0" Click="AddUser_Click"/>
+                    <Button Content="Редактировать" Width="100" Margin="0 0 10 0" 
+                Click="EditUser_Click" x:Name="EditButton" IsEnabled="False"/>
+                    <Button Content="Удалить" Width="100" Click="DeleteUser_Click" 
+                x:Name="DeleteButton" IsEnabled="False"/>
+                </StackPanel>
+            </Grid>
+        </TabItem>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
-            <Button Content="Добавить" Width="100" Margin="0 0 10 0" Click="AddUser_Click"/>
-            <Button Content="Редактировать" Width="100" Margin="0 0 10 0" 
-                    Click="EditUser_Click" x:Name="EditButton" IsEnabled="False"/>
-            <Button Content="Удалить" Width="100" Click="DeleteUser_Click" 
-                    x:Name="DeleteButton" IsEnabled="False"/>
-        </StackPanel>
-    </Grid>
+        <TabItem Header="История входа">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10">
+                    <TextBlock Text="Логин:" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                    <TextBox x:Name="LoginFilterTextBox" Width="150" Margin="0 0 10 0"/>
+
+                    <TextBlock Text="С:" VerticalAlignment="Center" Margin="10 0 5 0"/>
+                    <DatePicker x:Name="DateFromPicker" Width="120" Margin="0 0 10 0"/>
+
+                    <TextBlock Text="По:" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                    <DatePicker x:Name="DateToPicker" Width="120" Margin="0 0 10 0"/>
+
+                    <Button Content="Применить фильтр" Click="ApplyHistoryFilter_Click" Margin="0 0 10 0"/>
+                    <Button Content="Сбросить фильтр" Click="ResetHistoryFilter_Click"/>
+                </StackPanel>
+
+                <DataGrid x:Name="HistoryGrid" Grid.Row="2" AutoGenerateColumns="False" CanUserAddRows="False" 
+                  IsReadOnly="True" SelectionMode="Single">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                        <DataGridTextColumn Header="Логин" Binding="{Binding Login}"/>
+                        <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}"/>
+                        <DataGridTextColumn Header="Дата/время" Binding="{Binding LoginTime, StringFormat={}{0:dd.MM.yyyy HH:mm:ss}}"/>
+                        <DataGridTextColumn Header="IP-адрес" Binding="{Binding IpAddress}"/>
+                        <DataGridCheckBoxColumn Header="Успех" Binding="{Binding Success}"/>
+                        <DataGridTextColumn Header="Причина отказа" Binding="{Binding FailureReason}"/>
+                        <DataGridTextColumn Header="Система" Binding="{Binding SystemInfo}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </TabItem>
+    </TabControl>
 </Window>

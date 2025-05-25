@@ -78,3 +78,4 @@ C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\ViewModel
 C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\ViewModels\AddEditVydachaWindow.baml
 C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\ViewModels\AccountantWindow.g.cs
 C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Debug\ViewModels\AccountantWindow.baml
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\bin\Debug\ru\EntityFramework.SqlServer.resources.dll

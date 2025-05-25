@@ -27,6 +27,8 @@
         <AssociationConnector Association="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.FK_Пользователи_Роль" ManuallyRouted="false" />
         <AssociationConnector Association="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.FK_Сотрудник_Профессия" ManuallyRouted="false" />
         <AssociationConnector Association="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.FK_СИЗ_ТипСИЗ" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.ИсторияВхода" Width="1.5" PointX="7.5" PointY="19.125" />
+        <AssociationConnector Association="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.FK_ИсторияВхода_Пользователи" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

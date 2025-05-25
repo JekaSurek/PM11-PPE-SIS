@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:УчетСИЗ.ViewModels"
         mc:Ignorable="d"
-       Title="Сотрудник" Height="320" Width="400" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+       Title="Сотрудник" Height="auto" Width="400" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModelContainer" CdmEntityContainer="БелкаФаворитСпичечнаяФабрикаБазаДанныхEntities">
+    <EntitySetMapping Name="Выдача">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Выдача">
+        <MappingFragment StoreEntitySet="Выдача">
+          <ScalarProperty Name="id_Выдачи" ColumnName="id_Выдачи" />
+          <ScalarProperty Name="id_сотрудника" ColumnName="id_сотрудника" />
+          <ScalarProperty Name="id_сиз" ColumnName="id_сиз" />
+          <ScalarProperty Name="Дата_выдачи" ColumnName="Дата_выдачи" />
+          <ScalarProperty Name="количество" ColumnName="количество" />
+          <ScalarProperty Name="Срок_износа" ColumnName="Срок_износа" />
+          <ScalarProperty Name="Дата_создания" ColumnName="Дата_создания" />
+          <ScalarProperty Name="Дата_изменения" ColumnName="Дата_изменения" />
+          <ScalarProperty Name="Кем_создана" ColumnName="Кем_создана" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ДерматологическоеСредство">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.ДерматологическоеСредство">
+        <MappingFragment StoreEntitySet="ДерматологическоеСредство">
+          <ScalarProperty Name="id_ДерматологическогоСредства" ColumnName="id_ДерматологическогоСредства" />
+          <ScalarProperty Name="id_профессии" ColumnName="id_профессии" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Норма" ColumnName="Норма" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Инфраструктура">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Инфраструктура">
+        <MappingFragment StoreEntitySet="Инфраструктура">
+          <ScalarProperty Name="id_Инфраструктуры" ColumnName="id_Инфраструктуры" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="НормаВыдачи">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.НормаВыдачи">
+        <MappingFragment StoreEntitySet="НормаВыдачи">
+          <ScalarProperty Name="id_Нормы" ColumnName="id_Нормы" />
+          <ScalarProperty Name="id_профессии" ColumnName="id_профессии" />
+          <ScalarProperty Name="id_сиз" ColumnName="id_сиз" />
+          <ScalarProperty Name="Норма_в_единицах_измерения" ColumnName="Норма_в_единицах_измерения" />
+          <ScalarProperty Name="Период" ColumnName="Период" />
+          <ScalarProperty Name="Сезон" ColumnName="Сезон" />
+          <ScalarProperty Name="Основание_назначения" ColumnName="Основание_назначения" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Пользователи">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Пользователи">
+        <MappingFragment StoreEntitySet="Пользователи">
+          <ScalarProperty Name="id_Пользователя" ColumnName="id_Пользователя" />
+          <ScalarProperty Name="Логин" ColumnName="Логин" />
+          <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+          <ScalarProperty Name="id_роли" ColumnName="id_роли" />
+          <ScalarProperty Name="Фамилия_сотрудника" ColumnName="Фамилия_сотрудника" />
+          <ScalarProperty Name="Имя_сотрудника" ColumnName="Имя_сотрудника" />
+          <ScalarProperty Name="Отчество_сотрудника" ColumnName="Отчество_сотрудника" />
+          <ScalarProperty Name="Дата_создания" ColumnName="Дата_создания" />
+          <ScalarProperty Name="Дата_изменения" ColumnName="Дата_изменения" />
+          <ScalarProperty Name="Дата_последнего_входа" ColumnName="Дата_последнего_входа" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Профессия">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Профессия">
+        <MappingFragment StoreEntitySet="Профессия">
+          <ScalarProperty Name="id_Профессии_или_должности" ColumnName="id_Профессии_или_должности" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Код_по_нормативу" ColumnName="Код_по_нормативу" />
+          <ScalarProperty Name="id_инфраструктуры_или_отдела" ColumnName="id_инфраструктуры_или_отдела" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Роль">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Роль">
+        <MappingFragment StoreEntitySet="Роль">
+          <ScalarProperty Name="id_Роли" ColumnName="id_Роли" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Сезон">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Сезон">
+        <MappingFragment StoreEntitySet="Сезон">
+          <ScalarProperty Name="id_Сезона" ColumnName="id_Сезона" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="СИЗ">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.СИЗ">
+        <MappingFragment StoreEntitySet="СИЗ">
+          <ScalarProperty Name="id_СИЗ" ColumnName="id_СИЗ" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="id_типаСИЗ" ColumnName="id_типаСИЗ" />
+          <ScalarProperty Name="Единица_измерения" ColumnName="Единица_измерения" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Сотрудник">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Сотрудник">
+        <MappingFragment StoreEntitySet="Сотрудник">
+          <ScalarProperty Name="id_Сотрудника" ColumnName="id_Сотрудника" />
+          <ScalarProperty Name="id_профессии" ColumnName="id_профессии" />
+          <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+          <ScalarProperty Name="Имя" ColumnName="Имя" />
+          <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ТипСИЗ">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.ТипСИЗ">
+        <MappingFragment StoreEntitySet="ТипСИЗ">
+          <ScalarProperty Name="id_Типа" ColumnName="id_Типа" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_ДобавитьВыдачу" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_ДобавитьВыдачу" />
+    <FunctionImportMapping FunctionImportName="sp_ДобавитьПользователя" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_ДобавитьПользователя" />
+    <FunctionImportMapping FunctionImportName="sp_AddДерматологическоеСредство" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_AddДерматологическоеСредство" />
+    <FunctionImportMapping FunctionImportName="sp_AddИнфраструктура" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_AddИнфраструктура" />
+    <FunctionImportMapping FunctionImportName="sp_AddНормаВыдачи" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_AddНормаВыдачи" />
+    <FunctionImportMapping FunctionImportName="sp_AddПрофессия" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_AddПрофессия" />
+    <FunctionImportMapping FunctionImportName="sp_AddСезон" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_AddСезон" />
+    <FunctionImportMapping FunctionImportName="sp_AddСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_AddСИЗ" />
+    <FunctionImportMapping FunctionImportName="sp_AddСотрудник" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_AddСотрудник" />
+    <FunctionImportMapping FunctionImportName="sp_AddТипСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_AddТипСИЗ" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteВыдача" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteВыдача" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteДерматологическоеСредство" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteДерматологическоеСредство" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteИнфраструктура" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteИнфраструктура" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteНормаВыдачи" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteНормаВыдачи" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteПрофессия" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteПрофессия" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteСезон" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteСезон" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteСИЗ" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteСотрудник" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteСотрудник" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteТипСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_DeleteТипСИЗ" />
+    <FunctionImportMapping FunctionImportName="sp_GetВыдача" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetВыдача">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetВыдача_Result">
+          <ScalarProperty Name="id_Выдачи" ColumnName="id_Выдачи" />
+          <ScalarProperty Name="id_сотрудника" ColumnName="id_сотрудника" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="id_сиз" ColumnName="id_сиз" />
+          <ScalarProperty Name="SIZName" ColumnName="SIZName" />
+          <ScalarProperty Name="Дата_выдачи" ColumnName="Дата_выдачи" />
+          <ScalarProperty Name="количество" ColumnName="количество" />
+          <ScalarProperty Name="Срок_износа" ColumnName="Срок_износа" />
+          <ScalarProperty Name="Кем_создана" ColumnName="Кем_создана" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetДерматологическоеСредство" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetДерматологическоеСредство">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetДерматологическоеСредство_Result">
+          <ScalarProperty Name="id_ДерматологическогоСредства" ColumnName="id_ДерматологическогоСредства" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Норма" ColumnName="Норма" />
+          <ScalarProperty Name="id_профессии" ColumnName="id_профессии" />
+          <ScalarProperty Name="ProfessionName" ColumnName="ProfessionName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetИнфраструктура" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetИнфраструктура">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetИнфраструктура_Result">
+          <ScalarProperty Name="id_Инфраструктуры" ColumnName="id_Инфраструктуры" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetНормаВыдачи" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetНормаВыдачи">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetНормаВыдачи_Result">
+          <ScalarProperty Name="id_Нормы" ColumnName="id_Нормы" />
+          <ScalarProperty Name="id_профессии" ColumnName="id_профессии" />
+          <ScalarProperty Name="ProfessionName" ColumnName="ProfessionName" />
+          <ScalarProperty Name="id_сиз" ColumnName="id_сиз" />
+          <ScalarProperty Name="SIZName" ColumnName="SIZName" />
+          <ScalarProperty Name="Норма_в_единицах_измерения" ColumnName="Норма_в_единицах_измерения" />
+          <ScalarProperty Name="Период" ColumnName="Период" />
+          <ScalarProperty Name="id_Сезона" ColumnName="id_Сезона" />
+          <ScalarProperty Name="SeasonName" ColumnName="SeasonName" />
+          <ScalarProperty Name="Основание_назначения" ColumnName="Основание_назначения" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetПрофессия" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetПрофессия">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetПрофессия_Result">
+          <ScalarProperty Name="id_Профессии_или_должности" ColumnName="id_Профессии_или_должности" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Код_по_нормативу" ColumnName="Код_по_нормативу" />
+          <ScalarProperty Name="id_инфраструктуры_или_отдела" ColumnName="id_инфраструктуры_или_отдела" />
+          <ScalarProperty Name="InfrastructureName" ColumnName="InfrastructureName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetСезон" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСезон">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСезон_Result">
+          <ScalarProperty Name="id_Сезона" ColumnName="id_Сезона" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСИЗ">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСИЗ_Result">
+          <ScalarProperty Name="id_СИЗ" ColumnName="id_СИЗ" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Единица_измерения" ColumnName="Единица_измерения" />
+          <ScalarProperty Name="id_типаСИЗ" ColumnName="id_типаСИЗ" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetСотрудник" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСотрудник">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСотрудник_Result">
+          <ScalarProperty Name="id_Сотрудника" ColumnName="id_Сотрудника" />
+          <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+          <ScalarProperty Name="Имя" ColumnName="Имя" />
+          <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+          <ScalarProperty Name="id_профессии" ColumnName="id_профессии" />
+          <ScalarProperty Name="ProfessionName" ColumnName="ProfessionName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetТипСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetТипСИЗ">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetТипСИЗ_Result">
+          <ScalarProperty Name="id_Типа" ColumnName="id_Типа" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateВыдача" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateВыдача" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateДерматологическоеСредство" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateДерматологическоеСредство" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateИнфраструктура" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateИнфраструктура" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateНормаВыдачи" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateНормаВыдачи" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateПрофессия" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateПрофессия" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateСезон" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateСезон" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateСИЗ" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateСотрудник" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateСотрудник" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateТипСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateТипСИЗ" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="sp_ОбновитьПользователя" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_ОбновитьПользователя" />
+    <EntitySetMapping Name="ИсторияВхода">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.ИсторияВхода">
+        <MappingFragment StoreEntitySet="ИсторияВхода">
+          <ScalarProperty Name="Причина_отказа" ColumnName="Причина_отказа" />
+          <ScalarProperty Name="Успех" ColumnName="Успех" />
+          <ScalarProperty Name="IP_adress" ColumnName="IP_adress" />
+          <ScalarProperty Name="Система" ColumnName="Система" />
+          <ScalarProperty Name="Время_входа_в_систему" ColumnName="Время_входа_в_систему" />
+          <ScalarProperty Name="id_пользователя" ColumnName="id_пользователя" />
+          <ScalarProperty Name="id_Записи" ColumnName="id_Записи" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

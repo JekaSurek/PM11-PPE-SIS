@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -52,33 +54,107 @@ namespace УчетСИЗ.Models
             using (var db = new БелкаФаворитСпичечнаяФабрикаБазаДанныхEntities())
             {
                 var user = db.Пользователи.FirstOrDefault(u => u.Логин == login && u.Пароль == password);
+
+                // Получаем IP-адрес
+                string ipAddress = GetLocalIPAddress();
+                // Получаем информацию о системе
+                string systemInfo = Environment.OSVersion.ToString();
+
                 if (user != null)
                 {
-                    user.Дата_последнего_входа = System.DateTime.Now;
-                    db.SaveChanges();
-
-                    //Устанавливаем текущего пользователя
-                    ThisUser.SetCurrentUser(user);
-
-                    if (user.id_роли == 1)
+                    try
                     {
-                        MainWindow mainWindow = new MainWindow();
-                        mainWindow.Show();
-                        window.Close();
+                        // Обновляем дату последнего входа
+                        user.Дата_последнего_входа = DateTime.Now;
+                        db.SaveChanges();
+
+                        // Записываем успешный вход в историю
+                        var loginHistory = new ИсторияВхода
+                        {
+                            id_пользователя = user.id_Пользователя,
+                            Время_входа_в_систему = DateTime.Now,
+                            Система = systemInfo,
+                            IP_adress = ipAddress,
+                            Успех = true,
+                            Причина_отказа = null
+                        };
+                        db.ИсторияВхода.Add(loginHistory);
+                        db.SaveChanges();
+
+                        ThisUser.SetCurrentUser(user);
+
+                        if (user.id_роли == 1)
+                        {
+                            MainWindow mainWindow = new MainWindow();
+                            mainWindow.Show();
+                            window.Close();
+                        }
+                        else if (user.id_роли == 2)
+                        {
+                            ManagerWindow managerWindow = new ManagerWindow();
+                            managerWindow.Show();
+                            window.Close();
+                        }
+                        else if (user.id_роли == 6)
+                        {
+                            AccountantWindow accountantWindow = new AccountantWindow();
+                            accountantWindow.Show();
+                            window.Close();
+                        }
                     }
-                    else if (user.id_роли == 2)
+                    catch (Exception ex)
                     {
-                        ManagerWindow managerWindow = new ManagerWindow();
-                        managerWindow.Show();
-                        window.Close();
+                        MessageBox.Show($"Ошибка при сохранении данных входа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
                 {
+                    try
+                    {
+                        var failedLogin = new ИсторияВхода
+                        {
+                            Время_входа_в_систему = DateTime.Now,
+                            Система = systemInfo,
+                            IP_adress = ipAddress,
+                            Успех = false,
+                            Причина_отказа = "Неверный логин или пароль"
+                        };
+                        db.ИсторияВхода.Add(failedLogin);
+                        db.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"Ошибка при записи неудачного входа: {ex.Message}");
+                    }
+
                     MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
+
+        // Метод для получения локального IP-адреса
+        private string GetLocalIPAddress()
+        {
+            try
+            {
+                string hostName = Dns.GetHostName();
+                IPAddress[] addresses = Dns.GetHostAddresses(hostName);
+
+                foreach (IPAddress address in addresses)
+                {
+                    if (address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                    {
+                        return address.ToString();
+                    }
+                }
+                return "127.0.0.1";
+            }
+            catch
+            {
+                return "Unknown";
+            }
+        }
+
         public void ClearDat()
         {
             ThisUser.ClearCurrentUser();

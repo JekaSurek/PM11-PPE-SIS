@@ -5,8 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:УчетСИЗ.ViewModels"
         mc:Ignorable="d"
-        Title="AccountantWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Окно бухгалтера - Учет СИЗ" Height="600" Width="1000"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10">
+            <Button Content="Экспорт в Excel" Width="120" Click="ExportToExcel_Click"/>
+            <Button Content="Обновить данные" Margin="10 0 0 0" Width="auto" Click="RefreshData_Click"/>
+            <Button x:Name="LogoutButton" Content="Выйти" HorizontalAlignment="Right" Margin="10 0 0 0" Click="LogoutButton_Click"/>
+        </StackPanel>
+
+        <DataGrid x:Name="NormsGrid" Grid.Row="1" AutoGenerateColumns="False" 
+                  CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Инфраструктура" Binding="{Binding Infrastructure}" Width="200"/>
+                <DataGridTextColumn Header="Профессия" Binding="{Binding Profession}" Width="200"/>
+                <DataGridTextColumn Header="СИЗ" Binding="{Binding SIZ}" Width="150"/>
+                <DataGridTextColumn Header="Тип СИЗ" Binding="{Binding SIZType}" Width="100"/>
+                <DataGridTextColumn Header="Ед. изм." Binding="{Binding Unit}" Width="70"/>
+                <DataGridTextColumn Header="Норма" Binding="{Binding Norm}" Width="70"/>
+                <DataGridTextColumn Header="Период" Binding="{Binding Period}" Width="100"/>
+                <DataGridTextColumn Header="Сезон" Binding="{Binding Season}" Width="100"/>
+                <DataGridTextColumn Header="Основание" Binding="{Binding Basis}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

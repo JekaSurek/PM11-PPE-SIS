@@ -38,6 +38,7 @@ namespace УчетСИЗ
         public virtual DbSet<СИЗ> СИЗ { get; set; }
         public virtual DbSet<Сотрудник> Сотрудник { get; set; }
         public virtual DbSet<ТипСИЗ> ТипСИЗ { get; set; }
+        public virtual DbSet<ИсторияВхода> ИсторияВхода { get; set; }
     
         public virtual int sp_ДобавитьВыдачу(Nullable<int> id_сотрудника, Nullable<int> id_сиз, Nullable<int> количество, Nullable<System.DateTime> срок_износа, Nullable<int> кем_создана)
         {

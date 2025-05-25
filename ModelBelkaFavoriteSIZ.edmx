@@ -36,6 +36,18 @@
           <Property Name="Наименование" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Описание" Type="nvarchar" MaxLength="3000" />
         </EntityType>
+        <EntityType Name="ИсторияВхода">
+          <Key>
+            <PropertyRef Name="id_Записи" />
+          </Key>
+          <Property Name="id_Записи" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_пользователя" Type="int" />
+          <Property Name="Время_входа_в_систему" Type="datetime" Nullable="false" />
+          <Property Name="Система" Type="nvarchar(max)" />
+          <Property Name="IP_adress" Type="nvarchar" MaxLength="45" Nullable="false" />
+          <Property Name="Успех" Type="bit" Nullable="false" />
+          <Property Name="Причина_отказа" Type="nvarchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="НормаВыдачи">
           <Key>
             <PropertyRef Name="id_Нормы" />
@@ -159,6 +171,18 @@
             </Principal>
             <Dependent Role="ДерматологическоеСредство">
               <PropertyRef Name="id_профессии" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ИсторияВхода_Пользователи">
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
+          <End Role="ИсторияВхода" Type="Self.ИсторияВхода" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="id_Пользователя" />
+            </Principal>
+            <Dependent Role="ИсторияВхода">
+              <PropertyRef Name="id_пользователя" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -438,6 +462,7 @@
           <EntitySet Name="Выдача" EntityType="Self.Выдача" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ДерматологическоеСредство" EntityType="Self.ДерматологическоеСредство" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Инфраструктура" EntityType="Self.Инфраструктура" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ИсторияВхода" EntityType="Self.ИсторияВхода" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="НормаВыдачи" EntityType="Self.НормаВыдачи" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Пользователи" EntityType="Self.Пользователи" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Профессия" EntityType="Self.Профессия" Schema="dbo" store:Type="Tables" />
@@ -461,6 +486,10 @@
           <AssociationSet Name="FK_ДерматологическоеСредство_Профессия" Association="Self.FK_ДерматологическоеСредство_Профессия">
             <End Role="Профессия" EntitySet="Профессия" />
             <End Role="ДерматологическоеСредство" EntitySet="ДерматологическоеСредство" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ИсторияВхода_Пользователи" Association="Self.FK_ИсторияВхода_Пользователи">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="ИсторияВхода" EntitySet="ИсторияВхода" />
           </AssociationSet>
           <AssociationSet Name="FK_НормаВыдачи_Профессия" Association="Self.FK_НормаВыдачи_Профессия">
             <End Role="Профессия" EntitySet="Профессия" />
@@ -562,6 +591,7 @@
           <Property Name="Дата_последнего_входа" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Выдача" Relationship="Self.FK_Выдача_Пользователи" FromRole="Пользователи" ToRole="Выдача" />
           <NavigationProperty Name="Роль" Relationship="Self.FK_Пользователи_Роль" FromRole="Пользователи" ToRole="Роль" />
+          <NavigationProperty Name="ИсторияВхода" Relationship="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.FK_ИсторияВхода_Пользователи" FromRole="Пользователи" ToRole="ИсторияВхода" />
         </EntityType>
         <EntityType Name="Профессия">
           <Key>
@@ -1002,6 +1032,11 @@
             <Parameter Name="Имя_сотрудника" Mode="In" Type="String" />
             <Parameter Name="Отчество_сотрудника" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="ИсторияВхода" EntityType="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.ИсторияВхода" />
+          <AssociationSet Name="FK_ИсторияВхода_Пользователи" Association="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.FK_ИсторияВхода_Пользователи">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="ИсторияВхода" EntitySet="ИсторияВхода" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_GetВыдача_Result">
           <Property Type="Int32" Name="id_Выдачи" Nullable="false" />
@@ -1080,6 +1115,31 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="ИсторияВхода">
+          <Key>
+            <PropertyRef Name="id_Записи" />
+          </Key>
+          <Property Name="id_Записи" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_пользователя" Type="Int32" />
+          <Property Name="Время_входа_в_систему" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Система" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IP_adress" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="Успех" Type="Boolean" Nullable="false" />
+          <Property Name="Причина_отказа" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Пользователи" Relationship="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.FK_ИсторияВхода_Пользователи" FromRole="ИсторияВхода" ToRole="Пользователи" />
+        </EntityType>
+        <Association Name="FK_ИсторияВхода_Пользователи">
+          <End Type="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Пользователи" Role="Пользователи" Multiplicity="0..1" />
+          <End Type="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.ИсторияВхода" Role="ИсторияВхода" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="id_Пользователя" />
+            </Principal>
+            <Dependent Role="ИсторияВхода">
+              <PropertyRef Name="id_пользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1358,6 +1418,19 @@
           <FunctionImportMapping FunctionImportName="sp_UpdateТипСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateТипСИЗ" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="sp_ОбновитьПользователя" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_ОбновитьПользователя" />
+          <EntitySetMapping Name="ИсторияВхода">
+            <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.ИсторияВхода">
+              <MappingFragment StoreEntitySet="ИсторияВхода">
+                <ScalarProperty Name="Причина_отказа" ColumnName="Причина_отказа" />
+                <ScalarProperty Name="Успех" ColumnName="Успех" />
+                <ScalarProperty Name="IP_adress" ColumnName="IP_adress" />
+                <ScalarProperty Name="Система" ColumnName="Система" />
+                <ScalarProperty Name="Время_входа_в_систему" ColumnName="Время_входа_в_систему" />
+                <ScalarProperty Name="id_пользователя" ColumnName="id_пользователя" />
+                <ScalarProperty Name="id_Записи" ColumnName="id_Записи" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

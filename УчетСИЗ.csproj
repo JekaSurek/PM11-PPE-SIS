@@ -41,6 +41,10 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -81,7 +85,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelBelkaFavoriteSIZ.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountantModel.cs" />
     <Compile Include="Models\DataBaseHelper.cs" />
+    <Compile Include="Models\LoginHistory.cs" />
     <Compile Include="Models\ManagerModels.cs" />
     <Compile Include="Models\ThisUser.cs" />
     <Compile Include="Models\User.cs" />
@@ -167,6 +173,9 @@
       <DependentUpon>ModelBelkaFavoriteSIZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Инфраструктура.cs">
+      <DependentUpon>ModelBelkaFavoriteSIZ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ИсторияВхода.cs">
       <DependentUpon>ModelBelkaFavoriteSIZ.tt</DependentUpon>
     </Compile>
     <Compile Include="НормаВыдачи.cs">

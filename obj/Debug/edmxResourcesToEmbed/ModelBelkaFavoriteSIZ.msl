@@ -273,5 +273,18 @@
     <FunctionImportMapping FunctionImportName="sp_UpdateТипСИЗ" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_UpdateТипСИЗ" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_upgraddiagrams" />
     <FunctionImportMapping FunctionImportName="sp_ОбновитьПользователя" FunctionName="Хранилище БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_ОбновитьПользователя" />
+    <EntitySetMapping Name="ИсторияВхода">
+      <EntityTypeMapping TypeName="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.ИсторияВхода">
+        <MappingFragment StoreEntitySet="ИсторияВхода">
+          <ScalarProperty Name="Причина_отказа" ColumnName="Причина_отказа" />
+          <ScalarProperty Name="Успех" ColumnName="Успех" />
+          <ScalarProperty Name="IP_adress" ColumnName="IP_adress" />
+          <ScalarProperty Name="Система" ColumnName="Система" />
+          <ScalarProperty Name="Время_входа_в_систему" ColumnName="Время_входа_в_систему" />
+          <ScalarProperty Name="id_пользователя" ColumnName="id_пользователя" />
+          <ScalarProperty Name="id_Записи" ColumnName="id_Записи" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -27,19 +27,21 @@ namespace УчетСИЗ
         private List<User> users;
         private User selectedUser;
         User _user = new User();
+        private LoginHistory _loginHistory = new LoginHistory();
         public MainWindow()
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
+            DateFromPicker.SelectedDate = DateTime.Now.AddDays(-7);
+            DateToPicker.SelectedDate = DateTime.Now;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             db = new БелкаФаворитСпичечнаяФабрикаБазаДанныхEntities();
             _user.LoadUsers(UsersGrid);
+            _loginHistory.LoadHistory(HistoryGrid);
         }
-
-
 
         private void FilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -129,6 +131,33 @@ namespace УчетСИЗ
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
             this.Close();
+        }
+        private void ApplyHistoryFilter_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime? dateFrom = DateFromPicker.SelectedDate;
+            DateTime? dateTo = DateToPicker.SelectedDate;
+
+            // Проверка, чтобы дата "С" не была больше даты "По"
+            if (dateFrom.HasValue && dateTo.HasValue && dateFrom > dateTo)
+            {
+                MessageBox.Show("Дата 'С' не может быть больше даты 'По'", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            _loginHistory.LoadHistory(
+                HistoryGrid,
+                LoginFilterTextBox.Text,
+                dateFrom,
+                dateTo
+            );
+        }
+
+        private void ResetHistoryFilter_Click(object sender, RoutedEventArgs e)
+        {
+            LoginFilterTextBox.Text = "";
+            DateFromPicker.SelectedDate = null;
+            DateToPicker.SelectedDate = null;
+            _loginHistory.LoadHistory(HistoryGrid);
         }
     }
 }

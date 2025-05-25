@@ -1,0 +1,20 @@
+﻿УчетСИЗ
+
+
+winexe
+C#
+.cs
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\obj\Release\
+УчетСИЗ
+none
+false
+TRACE
+C:\$Производственная ПМ11\Git\PM11-PPE-SIS\App.xaml
+15212570692
+21864639295
+521810414762
+201965119565
+MainWindow.xaml;ViewModels\AccountantWindow.xaml;ViewModels\AddEditDermatologWindow.xaml;ViewModels\AddEditEmployeeWindow.xaml;ViewModels\AddEditInfraWindow.xaml;ViewModels\AddEditNormaWindow.xaml;ViewModels\AddEditProfWindow.xaml;ViewModels\AddEditSeasonWindow.xaml;ViewModels\AddEditSIZTypeWindow.xaml;ViewModels\AddEditSIZWindow.xaml;ViewModels\AddEditVydachaWindow.xaml;ViewModels\AddUserWindow.xaml;ViewModels\EditUserWindow.xaml;ViewModels\LoginWindow.xaml;ViewModels\ManagerWindow.xaml;
+
+False
+

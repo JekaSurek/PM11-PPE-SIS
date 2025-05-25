@@ -1,0 +1,619 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Выдача">
+    <Key>
+      <PropertyRef Name="id_Выдачи" />
+    </Key>
+    <Property Name="id_Выдачи" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_сотрудника" Type="Int32" Nullable="false" />
+    <Property Name="id_сиз" Type="Int32" Nullable="false" />
+    <Property Name="Дата_выдачи" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="количество" Type="Int32" Nullable="false" />
+    <Property Name="Срок_износа" Type="DateTime" Precision="0" />
+    <Property Name="Дата_создания" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Дата_изменения" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Кем_создана" Type="Int32" />
+    <NavigationProperty Name="Пользователи" Relationship="Self.FK_Выдача_Пользователи" FromRole="Выдача" ToRole="Пользователи" />
+    <NavigationProperty Name="СИЗ" Relationship="Self.FK_Выдача_СИЗ" FromRole="Выдача" ToRole="СИЗ" />
+    <NavigationProperty Name="Сотрудник" Relationship="Self.FK_Выдача_Сотрудник" FromRole="Выдача" ToRole="Сотрудник" />
+  </EntityType>
+  <EntityType Name="ДерматологическоеСредство">
+    <Key>
+      <PropertyRef Name="id_ДерматологическогоСредства" />
+    </Key>
+    <Property Name="id_ДерматологическогоСредства" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_профессии" Type="Int32" Nullable="false" />
+    <Property Name="Наименование" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Норма" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Профессия" Relationship="Self.FK_ДерматологическоеСредство_Профессия" FromRole="ДерматологическоеСредство" ToRole="Профессия" />
+  </EntityType>
+  <EntityType Name="Инфраструктура">
+    <Key>
+      <PropertyRef Name="id_Инфраструктуры" />
+    </Key>
+    <Property Name="id_Инфраструктуры" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Наименование" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Описание" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Профессия" Relationship="Self.FK_Профессия_Инфраструктура" FromRole="Инфраструктура" ToRole="Профессия" />
+  </EntityType>
+  <EntityType Name="НормаВыдачи">
+    <Key>
+      <PropertyRef Name="id_Нормы" />
+    </Key>
+    <Property Name="id_Нормы" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_профессии" Type="Int32" Nullable="false" />
+    <Property Name="id_сиз" Type="Int32" Nullable="false" />
+    <Property Name="Норма_в_единицах_измерения" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Период" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Сезон" Type="Int32" Nullable="false" />
+    <Property Name="Основание_назначения" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Профессия" Relationship="Self.FK_НормаВыдачи_Профессия" FromRole="НормаВыдачи" ToRole="Профессия" />
+    <NavigationProperty Name="Сезон1" Relationship="Self.FK_НормаВыдачи_Сезон" FromRole="НормаВыдачи" ToRole="Сезон" />
+    <NavigationProperty Name="СИЗ" Relationship="Self.FK_НормаВыдачи_СИЗ" FromRole="НормаВыдачи" ToRole="СИЗ" />
+  </EntityType>
+  <EntityType Name="Пользователи">
+    <Key>
+      <PropertyRef Name="id_Пользователя" />
+    </Key>
+    <Property Name="id_Пользователя" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Логин" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Пароль" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_роли" Type="Int32" Nullable="false" />
+    <Property Name="Фамилия_сотрудника" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Имя_сотрудника" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Отчество_сотрудника" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Дата_создания" Type="DateTime" Precision="3" />
+    <Property Name="Дата_изменения" Type="DateTime" Precision="3" />
+    <Property Name="Дата_последнего_входа" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Выдача" Relationship="Self.FK_Выдача_Пользователи" FromRole="Пользователи" ToRole="Выдача" />
+    <NavigationProperty Name="Роль" Relationship="Self.FK_Пользователи_Роль" FromRole="Пользователи" ToRole="Роль" />
+    <NavigationProperty Name="ИсторияВхода" Relationship="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.FK_ИсторияВхода_Пользователи" FromRole="Пользователи" ToRole="ИсторияВхода" />
+  </EntityType>
+  <EntityType Name="Профессия">
+    <Key>
+      <PropertyRef Name="id_Профессии_или_должности" />
+    </Key>
+    <Property Name="id_Профессии_или_должности" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Наименование" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Код_по_нормативу" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="id_инфраструктуры_или_отдела" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ДерматологическоеСредство" Relationship="Self.FK_ДерматологическоеСредство_Профессия" FromRole="Профессия" ToRole="ДерматологическоеСредство" />
+    <NavigationProperty Name="Инфраструктура" Relationship="Self.FK_Профессия_Инфраструктура" FromRole="Профессия" ToRole="Инфраструктура" />
+    <NavigationProperty Name="НормаВыдачи" Relationship="Self.FK_НормаВыдачи_Профессия" FromRole="Профессия" ToRole="НормаВыдачи" />
+    <NavigationProperty Name="Сотрудник" Relationship="Self.FK_Сотрудник_Профессия" FromRole="Профессия" ToRole="Сотрудник" />
+  </EntityType>
+  <EntityType Name="Роль">
+    <Key>
+      <PropertyRef Name="id_Роли" />
+    </Key>
+    <Property Name="id_Роли" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Наименование" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Описание" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Пользователи" Relationship="Self.FK_Пользователи_Роль" FromRole="Роль" ToRole="Пользователи" />
+  </EntityType>
+  <EntityType Name="Сезон">
+    <Key>
+      <PropertyRef Name="id_Сезона" />
+    </Key>
+    <Property Name="id_Сезона" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="НормаВыдачи" Relationship="Self.FK_НормаВыдачи_Сезон" FromRole="Сезон" ToRole="НормаВыдачи" />
+  </EntityType>
+  <EntityType Name="СИЗ">
+    <Key>
+      <PropertyRef Name="id_СИЗ" />
+    </Key>
+    <Property Name="id_СИЗ" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Наименование" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_типаСИЗ" Type="Int32" Nullable="false" />
+    <Property Name="Единица_измерения" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Выдача" Relationship="Self.FK_Выдача_СИЗ" FromRole="СИЗ" ToRole="Выдача" />
+    <NavigationProperty Name="НормаВыдачи" Relationship="Self.FK_НормаВыдачи_СИЗ" FromRole="СИЗ" ToRole="НормаВыдачи" />
+    <NavigationProperty Name="ТипСИЗ" Relationship="Self.FK_СИЗ_ТипСИЗ" FromRole="СИЗ" ToRole="ТипСИЗ" />
+  </EntityType>
+  <EntityType Name="Сотрудник">
+    <Key>
+      <PropertyRef Name="id_Сотрудника" />
+    </Key>
+    <Property Name="id_Сотрудника" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_профессии" Type="Int32" Nullable="false" />
+    <Property Name="Фамилия" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Имя" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Отчество" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Выдача" Relationship="Self.FK_Выдача_Сотрудник" FromRole="Сотрудник" ToRole="Выдача" />
+    <NavigationProperty Name="Профессия" Relationship="Self.FK_Сотрудник_Профессия" FromRole="Сотрудник" ToRole="Профессия" />
+  </EntityType>
+  <EntityType Name="ТипСИЗ">
+    <Key>
+      <PropertyRef Name="id_Типа" />
+    </Key>
+    <Property Name="id_Типа" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Наименование" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Описание" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="СИЗ" Relationship="Self.FK_СИЗ_ТипСИЗ" FromRole="ТипСИЗ" ToRole="СИЗ" />
+  </EntityType>
+  <Association Name="FK_Выдача_Пользователи">
+    <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
+    <End Role="Выдача" Type="Self.Выдача" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Пользователи">
+        <PropertyRef Name="id_Пользователя" />
+      </Principal>
+      <Dependent Role="Выдача">
+        <PropertyRef Name="Кем_создана" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Выдача_СИЗ">
+    <End Role="СИЗ" Type="Self.СИЗ" Multiplicity="1" />
+    <End Role="Выдача" Type="Self.Выдача" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="СИЗ">
+        <PropertyRef Name="id_СИЗ" />
+      </Principal>
+      <Dependent Role="Выдача">
+        <PropertyRef Name="id_сиз" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Выдача_Сотрудник">
+    <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="1" />
+    <End Role="Выдача" Type="Self.Выдача" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Сотрудник">
+        <PropertyRef Name="id_Сотрудника" />
+      </Principal>
+      <Dependent Role="Выдача">
+        <PropertyRef Name="id_сотрудника" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ДерматологическоеСредство_Профессия">
+    <End Role="Профессия" Type="Self.Профессия" Multiplicity="1" />
+    <End Role="ДерматологическоеСредство" Type="Self.ДерматологическоеСредство" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Профессия">
+        <PropertyRef Name="id_Профессии_или_должности" />
+      </Principal>
+      <Dependent Role="ДерматологическоеСредство">
+        <PropertyRef Name="id_профессии" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Профессия_Инфраструктура">
+    <End Role="Инфраструктура" Type="Self.Инфраструктура" Multiplicity="1" />
+    <End Role="Профессия" Type="Self.Профессия" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Инфраструктура">
+        <PropertyRef Name="id_Инфраструктуры" />
+      </Principal>
+      <Dependent Role="Профессия">
+        <PropertyRef Name="id_инфраструктуры_или_отдела" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_НормаВыдачи_Профессия">
+    <End Role="Профессия" Type="Self.Профессия" Multiplicity="1" />
+    <End Role="НормаВыдачи" Type="Self.НормаВыдачи" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Профессия">
+        <PropertyRef Name="id_Профессии_или_должности" />
+      </Principal>
+      <Dependent Role="НормаВыдачи">
+        <PropertyRef Name="id_профессии" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_НормаВыдачи_Сезон">
+    <End Role="Сезон" Type="Self.Сезон" Multiplicity="1" />
+    <End Role="НормаВыдачи" Type="Self.НормаВыдачи" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Сезон">
+        <PropertyRef Name="id_Сезона" />
+      </Principal>
+      <Dependent Role="НормаВыдачи">
+        <PropertyRef Name="Сезон" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_НормаВыдачи_СИЗ">
+    <End Role="СИЗ" Type="Self.СИЗ" Multiplicity="1" />
+    <End Role="НормаВыдачи" Type="Self.НормаВыдачи" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="СИЗ">
+        <PropertyRef Name="id_СИЗ" />
+      </Principal>
+      <Dependent Role="НормаВыдачи">
+        <PropertyRef Name="id_сиз" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Пользователи_Роль">
+    <End Role="Роль" Type="Self.Роль" Multiplicity="1" />
+    <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Роль">
+        <PropertyRef Name="id_Роли" />
+      </Principal>
+      <Dependent Role="Пользователи">
+        <PropertyRef Name="id_роли" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Сотрудник_Профессия">
+    <End Role="Профессия" Type="Self.Профессия" Multiplicity="1" />
+    <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Профессия">
+        <PropertyRef Name="id_Профессии_или_должности" />
+      </Principal>
+      <Dependent Role="Сотрудник">
+        <PropertyRef Name="id_профессии" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_СИЗ_ТипСИЗ">
+    <End Role="ТипСИЗ" Type="Self.ТипСИЗ" Multiplicity="1" />
+    <End Role="СИЗ" Type="Self.СИЗ" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ТипСИЗ">
+        <PropertyRef Name="id_Типа" />
+      </Principal>
+      <Dependent Role="СИЗ">
+        <PropertyRef Name="id_типаСИЗ" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="БелкаФаворитСпичечнаяФабрикаБазаДанныхEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Выдача" EntityType="Self.Выдача" />
+    <EntitySet Name="ДерматологическоеСредство" EntityType="Self.ДерматологическоеСредство" />
+    <EntitySet Name="Инфраструктура" EntityType="Self.Инфраструктура" />
+    <EntitySet Name="НормаВыдачи" EntityType="Self.НормаВыдачи" />
+    <EntitySet Name="Пользователи" EntityType="Self.Пользователи" />
+    <EntitySet Name="Профессия" EntityType="Self.Профессия" />
+    <EntitySet Name="Роль" EntityType="Self.Роль" />
+    <EntitySet Name="Сезон" EntityType="Self.Сезон" />
+    <EntitySet Name="СИЗ" EntityType="Self.СИЗ" />
+    <EntitySet Name="Сотрудник" EntityType="Self.Сотрудник" />
+    <EntitySet Name="ТипСИЗ" EntityType="Self.ТипСИЗ" />
+    <AssociationSet Name="FK_Выдача_Пользователи" Association="Self.FK_Выдача_Пользователи">
+      <End Role="Пользователи" EntitySet="Пользователи" />
+      <End Role="Выдача" EntitySet="Выдача" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Выдача_СИЗ" Association="Self.FK_Выдача_СИЗ">
+      <End Role="СИЗ" EntitySet="СИЗ" />
+      <End Role="Выдача" EntitySet="Выдача" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Выдача_Сотрудник" Association="Self.FK_Выдача_Сотрудник">
+      <End Role="Сотрудник" EntitySet="Сотрудник" />
+      <End Role="Выдача" EntitySet="Выдача" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ДерматологическоеСредство_Профессия" Association="Self.FK_ДерматологическоеСредство_Профессия">
+      <End Role="Профессия" EntitySet="Профессия" />
+      <End Role="ДерматологическоеСредство" EntitySet="ДерматологическоеСредство" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Профессия_Инфраструктура" Association="Self.FK_Профессия_Инфраструктура">
+      <End Role="Инфраструктура" EntitySet="Инфраструктура" />
+      <End Role="Профессия" EntitySet="Профессия" />
+    </AssociationSet>
+    <AssociationSet Name="FK_НормаВыдачи_Профессия" Association="Self.FK_НормаВыдачи_Профессия">
+      <End Role="Профессия" EntitySet="Профессия" />
+      <End Role="НормаВыдачи" EntitySet="НормаВыдачи" />
+    </AssociationSet>
+    <AssociationSet Name="FK_НормаВыдачи_Сезон" Association="Self.FK_НормаВыдачи_Сезон">
+      <End Role="Сезон" EntitySet="Сезон" />
+      <End Role="НормаВыдачи" EntitySet="НормаВыдачи" />
+    </AssociationSet>
+    <AssociationSet Name="FK_НормаВыдачи_СИЗ" Association="Self.FK_НормаВыдачи_СИЗ">
+      <End Role="СИЗ" EntitySet="СИЗ" />
+      <End Role="НормаВыдачи" EntitySet="НормаВыдачи" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Пользователи_Роль" Association="Self.FK_Пользователи_Роль">
+      <End Role="Роль" EntitySet="Роль" />
+      <End Role="Пользователи" EntitySet="Пользователи" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Сотрудник_Профессия" Association="Self.FK_Сотрудник_Профессия">
+      <End Role="Профессия" EntitySet="Профессия" />
+      <End Role="Сотрудник" EntitySet="Сотрудник" />
+    </AssociationSet>
+    <AssociationSet Name="FK_СИЗ_ТипСИЗ" Association="Self.FK_СИЗ_ТипСИЗ">
+      <End Role="ТипСИЗ" EntitySet="ТипСИЗ" />
+      <End Role="СИЗ" EntitySet="СИЗ" />
+    </AssociationSet>
+    <FunctionImport Name="sp_ДобавитьВыдачу">
+      <Parameter Name="id_сотрудника" Mode="In" Type="Int32" />
+      <Parameter Name="id_сиз" Mode="In" Type="Int32" />
+      <Parameter Name="количество" Mode="In" Type="Int32" />
+      <Parameter Name="Срок_износа" Mode="In" Type="DateTime" />
+      <Parameter Name="Кем_создана" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ДобавитьПользователя" ReturnType="Collection(Decimal)">
+      <Parameter Name="Логин" Mode="In" Type="String" />
+      <Parameter Name="Пароль" Mode="In" Type="String" />
+      <Parameter Name="id_роли" Mode="In" Type="Int32" />
+      <Parameter Name="Фамилия_сотрудника" Mode="In" Type="String" />
+      <Parameter Name="Имя_сотрудника" Mode="In" Type="String" />
+      <Parameter Name="Отчество_сотрудника" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddДерматологическоеСредство">
+      <Parameter Name="Наименование" Mode="In" Type="String" />
+      <Parameter Name="Норма" Mode="In" Type="String" />
+      <Parameter Name="id_профессии" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddИнфраструктура">
+      <Parameter Name="Наименование" Mode="In" Type="String" />
+      <Parameter Name="Описание" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddНормаВыдачи">
+      <Parameter Name="id_профессии" Mode="In" Type="Int32" />
+      <Parameter Name="id_сиз" Mode="In" Type="Int32" />
+      <Parameter Name="Норма_в_единицах_измерения" Mode="In" Type="String" />
+      <Parameter Name="Период" Mode="In" Type="String" />
+      <Parameter Name="Сезон" Mode="In" Type="Int32" />
+      <Parameter Name="Основание_назначения" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddПрофессия">
+      <Parameter Name="Наименование" Mode="In" Type="String" />
+      <Parameter Name="Код_по_нормативу" Mode="In" Type="String" />
+      <Parameter Name="id_инфраструктуры_или_отдела" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddСезон">
+      <Parameter Name="Наименование" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddСИЗ">
+      <Parameter Name="Наименование" Mode="In" Type="String" />
+      <Parameter Name="Единица_измерения" Mode="In" Type="String" />
+      <Parameter Name="id_типаСИЗ" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddСотрудник">
+      <Parameter Name="Фамилия" Mode="In" Type="String" />
+      <Parameter Name="Имя" Mode="In" Type="String" />
+      <Parameter Name="Отчество" Mode="In" Type="String" />
+      <Parameter Name="id_профессии" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddТипСИЗ">
+      <Parameter Name="Наименование" Mode="In" Type="String" />
+      <Parameter Name="Описание" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteВыдача">
+      <Parameter Name="id_Выдачи" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteДерматологическоеСредство">
+      <Parameter Name="id_ДерматологическогоСредства" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteИнфраструктура">
+      <Parameter Name="id_Инфраструктуры" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteНормаВыдачи">
+      <Parameter Name="id_Нормы" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteПрофессия">
+      <Parameter Name="id_Профессии_или_должности" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteСезон">
+      <Parameter Name="id_Сезона" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteСИЗ">
+      <Parameter Name="id_СИЗ" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteСотрудник">
+      <Parameter Name="id_Сотрудника" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteТипСИЗ">
+      <Parameter Name="id_Типа" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetВыдача" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetВыдача_Result)">
+      <Parameter Name="filter" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetДерматологическоеСредство" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetДерматологическоеСредство_Result)">
+      <Parameter Name="filter" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetИнфраструктура" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetИнфраструктура_Result)">
+      <Parameter Name="filter" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetНормаВыдачи" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetНормаВыдачи_Result)">
+      <Parameter Name="filter" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetПрофессия" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetПрофессия_Result)">
+      <Parameter Name="filter" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetСезон" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСезон_Result)">
+      <Parameter Name="filter" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetСИЗ" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСИЗ_Result)">
+      <Parameter Name="filter" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetСотрудник" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetСотрудник_Result)">
+      <Parameter Name="filter" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetТипСИЗ" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_GetТипСИЗ_Result)">
+      <Parameter Name="filter" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateВыдача">
+      <Parameter Name="id_Выдачи" Mode="In" Type="Int32" />
+      <Parameter Name="id_сотрудника" Mode="In" Type="Int32" />
+      <Parameter Name="id_сиз" Mode="In" Type="Int32" />
+      <Parameter Name="количество" Mode="In" Type="Int32" />
+      <Parameter Name="Срок_износа" Mode="In" Type="DateTime" />
+      <Parameter Name="Кем_создана" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateДерматологическоеСредство">
+      <Parameter Name="id_ДерматологическогоСредства" Mode="In" Type="Int32" />
+      <Parameter Name="Наименование" Mode="In" Type="String" />
+      <Parameter Name="Норма" Mode="In" Type="String" />
+      <Parameter Name="id_профессии" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateИнфраструктура">
+      <Parameter Name="id_Инфраструктуры" Mode="In" Type="Int32" />
+      <Parameter Name="Наименование" Mode="In" Type="String" />
+      <Parameter Name="Описание" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateНормаВыдачи">
+      <Parameter Name="id_Нормы" Mode="In" Type="Int32" />
+      <Parameter Name="id_профессии" Mode="In" Type="Int32" />
+      <Parameter Name="id_сиз" Mode="In" Type="Int32" />
+      <Parameter Name="Норма_в_единицах_измерения" Mode="In" Type="String" />
+      <Parameter Name="Период" Mode="In" Type="String" />
+      <Parameter Name="Сезон" Mode="In" Type="Int32" />
+      <Parameter Name="Основание_назначения" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateПрофессия">
+      <Parameter Name="id_Профессии_или_должности" Mode="In" Type="Int32" />
+      <Parameter Name="Наименование" Mode="In" Type="String" />
+      <Parameter Name="Код_по_нормативу" Mode="In" Type="String" />
+      <Parameter Name="id_инфраструктуры_или_отдела" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateСезон">
+      <Parameter Name="id_Сезона" Mode="In" Type="Int32" />
+      <Parameter Name="Наименование" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateСИЗ">
+      <Parameter Name="id_СИЗ" Mode="In" Type="Int32" />
+      <Parameter Name="Наименование" Mode="In" Type="String" />
+      <Parameter Name="Единица_измерения" Mode="In" Type="String" />
+      <Parameter Name="id_типаСИЗ" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateСотрудник">
+      <Parameter Name="id_Сотрудника" Mode="In" Type="Int32" />
+      <Parameter Name="Фамилия" Mode="In" Type="String" />
+      <Parameter Name="Имя" Mode="In" Type="String" />
+      <Parameter Name="Отчество" Mode="In" Type="String" />
+      <Parameter Name="id_профессии" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateТипСИЗ">
+      <Parameter Name="id_Типа" Mode="In" Type="Int32" />
+      <Parameter Name="Наименование" Mode="In" Type="String" />
+      <Parameter Name="Описание" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="sp_ОбновитьПользователя">
+      <Parameter Name="id_Пользователя" Mode="In" Type="Int32" />
+      <Parameter Name="Логин" Mode="In" Type="String" />
+      <Parameter Name="Пароль" Mode="In" Type="String" />
+      <Parameter Name="id_роли" Mode="In" Type="Int32" />
+      <Parameter Name="Фамилия_сотрудника" Mode="In" Type="String" />
+      <Parameter Name="Имя_сотрудника" Mode="In" Type="String" />
+      <Parameter Name="Отчество_сотрудника" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="ИсторияВхода" EntityType="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.ИсторияВхода" />
+    <AssociationSet Name="FK_ИсторияВхода_Пользователи" Association="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.FK_ИсторияВхода_Пользователи">
+      <End Role="Пользователи" EntitySet="Пользователи" />
+      <End Role="ИсторияВхода" EntitySet="ИсторияВхода" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_GetВыдача_Result">
+    <Property Type="Int32" Name="id_Выдачи" Nullable="false" />
+    <Property Type="Int32" Name="id_сотрудника" Nullable="false" />
+    <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="201" />
+    <Property Type="Int32" Name="id_сиз" Nullable="false" />
+    <Property Type="String" Name="SIZName" Nullable="false" MaxLength="200" />
+    <Property Type="DateTime" Name="Дата_выдачи" Nullable="false" />
+    <Property Type="Int32" Name="количество" Nullable="false" />
+    <Property Type="DateTime" Name="Срок_износа" Nullable="true" />
+    <Property Type="Int32" Name="Кем_создана" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetДерматологическоеСредство_Result">
+    <Property Type="Int32" Name="id_ДерматологическогоСредства" Nullable="false" />
+    <Property Type="String" Name="Наименование" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Норма" Nullable="false" MaxLength="70" />
+    <Property Type="Int32" Name="id_профессии" Nullable="false" />
+    <Property Type="String" Name="ProfessionName" Nullable="false" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="sp_GetИнфраструктура_Result">
+    <Property Type="Int32" Name="id_Инфраструктуры" Nullable="false" />
+    <Property Type="String" Name="Наименование" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Описание" Nullable="true" MaxLength="3000" />
+  </ComplexType>
+  <ComplexType Name="sp_GetНормаВыдачи_Result">
+    <Property Type="Int32" Name="id_Нормы" Nullable="false" />
+    <Property Type="Int32" Name="id_профессии" Nullable="false" />
+    <Property Type="String" Name="ProfessionName" Nullable="false" MaxLength="200" />
+    <Property Type="Int32" Name="id_сиз" Nullable="false" />
+    <Property Type="String" Name="SIZName" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Норма_в_единицах_измерения" Nullable="false" MaxLength="80" />
+    <Property Type="String" Name="Период" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="id_Сезона" Nullable="false" />
+    <Property Type="String" Name="SeasonName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Основание_назначения" Nullable="false" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="sp_GetПрофессия_Result">
+    <Property Type="Int32" Name="id_Профессии_или_должности" Nullable="false" />
+    <Property Type="String" Name="Наименование" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Код_по_нормативу" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="id_инфраструктуры_или_отдела" Nullable="false" />
+    <Property Type="String" Name="InfrastructureName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="sp_GetСезон_Result">
+    <Property Type="Int32" Name="id_Сезона" Nullable="false" />
+    <Property Type="String" Name="Наименование" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_GetСИЗ_Result">
+    <Property Type="Int32" Name="id_СИЗ" Nullable="false" />
+    <Property Type="String" Name="Наименование" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Единица_измерения" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="id_типаСИЗ" Nullable="false" />
+    <Property Type="String" Name="TypeName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="sp_GetСотрудник_Result">
+    <Property Type="Int32" Name="id_Сотрудника" Nullable="false" />
+    <Property Type="String" Name="Фамилия" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Имя" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Отчество" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="id_профессии" Nullable="false" />
+    <Property Type="String" Name="ProfessionName" Nullable="false" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="sp_GetТипСИЗ_Result">
+    <Property Type="Int32" Name="id_Типа" Nullable="false" />
+    <Property Type="String" Name="Наименование" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Описание" Nullable="true" MaxLength="3000" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="ИсторияВхода">
+    <Key>
+      <PropertyRef Name="id_Записи" />
+    </Key>
+    <Property Name="id_Записи" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_пользователя" Type="Int32" />
+    <Property Name="Время_входа_в_систему" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Система" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IP_adress" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="true" />
+    <Property Name="Успех" Type="Boolean" Nullable="false" />
+    <Property Name="Причина_отказа" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Пользователи" Relationship="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.FK_ИсторияВхода_Пользователи" FromRole="ИсторияВхода" ToRole="Пользователи" />
+  </EntityType>
+  <Association Name="FK_ИсторияВхода_Пользователи">
+    <End Type="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Пользователи" Role="Пользователи" Multiplicity="0..1" />
+    <End Type="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.ИсторияВхода" Role="ИсторияВхода" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Пользователи">
+        <PropertyRef Name="id_Пользователя" />
+      </Principal>
+      <Dependent Role="ИсторияВхода">
+        <PropertyRef Name="id_пользователя" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

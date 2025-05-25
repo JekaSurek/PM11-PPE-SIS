@@ -67,6 +67,7 @@
     <Property Name="Дата_последнего_входа" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Выдача" Relationship="Self.FK_Выдача_Пользователи" FromRole="Пользователи" ToRole="Выдача" />
     <NavigationProperty Name="Роль" Relationship="Self.FK_Пользователи_Роль" FromRole="Пользователи" ToRole="Роль" />
+    <NavigationProperty Name="ИсторияВхода" Relationship="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.FK_ИсторияВхода_Пользователи" FromRole="Пользователи" ToRole="ИсторияВхода" />
   </EntityType>
   <EntityType Name="Профессия">
     <Key>
@@ -507,6 +508,11 @@
       <Parameter Name="Имя_сотрудника" Mode="In" Type="String" />
       <Parameter Name="Отчество_сотрудника" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="ИсторияВхода" EntityType="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.ИсторияВхода" />
+    <AssociationSet Name="FK_ИсторияВхода_Пользователи" Association="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.FK_ИсторияВхода_Пользователи">
+      <End Role="Пользователи" EntitySet="Пользователи" />
+      <End Role="ИсторияВхода" EntitySet="ИсторияВхода" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_GetВыдача_Result">
     <Property Type="Int32" Name="id_Выдачи" Nullable="false" />
@@ -585,4 +591,29 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
+  <EntityType Name="ИсторияВхода">
+    <Key>
+      <PropertyRef Name="id_Записи" />
+    </Key>
+    <Property Name="id_Записи" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_пользователя" Type="Int32" />
+    <Property Name="Время_входа_в_систему" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Система" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IP_adress" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="true" />
+    <Property Name="Успех" Type="Boolean" Nullable="false" />
+    <Property Name="Причина_отказа" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Пользователи" Relationship="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.FK_ИсторияВхода_Пользователи" FromRole="ИсторияВхода" ToRole="Пользователи" />
+  </EntityType>
+  <Association Name="FK_ИсторияВхода_Пользователи">
+    <End Type="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.Пользователи" Role="Пользователи" Multiplicity="0..1" />
+    <End Type="БелкаФаворитСпичечнаяФабрикаБазаДанныхModel.ИсторияВхода" Role="ИсторияВхода" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Пользователи">
+        <PropertyRef Name="id_Пользователя" />
+      </Principal>
+      <Dependent Role="ИсторияВхода">
+        <PropertyRef Name="id_пользователя" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

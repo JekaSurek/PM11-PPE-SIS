@@ -18,6 +18,7 @@ namespace УчетСИЗ
         public Пользователи()
         {
             this.Выдача = new HashSet<Выдача>();
+            this.ИсторияВхода = new HashSet<ИсторияВхода>();
         }
     
         public int id_Пользователя { get; set; }
@@ -34,5 +35,7 @@ namespace УчетСИЗ
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Выдача> Выдача { get; set; }
         public virtual Роль Роль { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ИсторияВхода> ИсторияВхода { get; set; }
     }
 }
