@@ -83,19 +83,19 @@ namespace УчетСИЗ.Models
 
                         ThisUser.SetCurrentUser(user);
 
-                        if (user.id_роли == 1)
+                        if (user.Роль.Наименование == "Администратор")
                         {
                             MainWindow mainWindow = new MainWindow();
                             mainWindow.Show();
                             window.Close();
                         }
-                        else if (user.id_роли == 2)
+                        else if (user.Роль.Наименование == "Менеджер СИЗ")
                         {
                             ManagerWindow managerWindow = new ManagerWindow();
                             managerWindow.Show();
                             window.Close();
                         }
-                        else if (user.id_роли == 6)
+                        else if (user.Роль.Наименование == "Бухгалтер")
                         {
                             AccountantWindow accountantWindow = new AccountantWindow();
                             accountantWindow.Show();
